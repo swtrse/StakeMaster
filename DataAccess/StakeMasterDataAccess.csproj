@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>StakeMaster.DataAccess</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StakeMasterCertificate.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyName>StakeMasterDA</AssemblyName>
+  </PropertyGroup>
+
+</Project>

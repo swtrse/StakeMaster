@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMaster", "StakeMaster\StakeMaster.csproj", "{5D8C1365-EEB5-457C-BE8D-D9A141FF29CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterBusinessLogic", "BusinessLogic\StakeMasterBusinessLogic.csproj", "{6FFD3D81-66A0-4605-8F25-4C15E6147C1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterDataAccess", "DataAccess\StakeMasterDataAccess.csproj", "{1DEF554F-1BE6-4128-999B-AE43DF989FB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterEntities", "StakeMasterEntities\StakeMasterEntities.csproj", "{EC4B5328-D29A-4181-9BB7-D48E430A93D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3B9AE93-2330-4863-93AD-50357C9035FD}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+		IntegrationTests.playlist = IntegrationTests.playlist
+		UnitTests.playlist = UnitTests.playlist
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0199FC71-0383-4DBC-A62F-56F6BF577956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterEntities.Test", "StakeMasterEntities.Test\StakeMasterEntities.Test.csproj", "{3FD6D60A-6D3C-45FA-9400-19267D73A568}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D8C1365-EEB5-457C-BE8D-D9A141FF29CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D8C1365-EEB5-457C-BE8D-D9A141FF29CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D8C1365-EEB5-457C-BE8D-D9A141FF29CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D8C1365-EEB5-457C-BE8D-D9A141FF29CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FFD3D81-66A0-4605-8F25-4C15E6147C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FFD3D81-66A0-4605-8F25-4C15E6147C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FFD3D81-66A0-4605-8F25-4C15E6147C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FFD3D81-66A0-4605-8F25-4C15E6147C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DEF554F-1BE6-4128-999B-AE43DF989FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DEF554F-1BE6-4128-999B-AE43DF989FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DEF554F-1BE6-4128-999B-AE43DF989FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DEF554F-1BE6-4128-999B-AE43DF989FB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4B5328-D29A-4181-9BB7-D48E430A93D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4B5328-D29A-4181-9BB7-D48E430A93D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4B5328-D29A-4181-9BB7-D48E430A93D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4B5328-D29A-4181-9BB7-D48E430A93D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD6D60A-6D3C-45FA-9400-19267D73A568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD6D60A-6D3C-45FA-9400-19267D73A568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FD6D60A-6D3C-45FA-9400-19267D73A568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FD6D60A-6D3C-45FA-9400-19267D73A568}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3FD6D60A-6D3C-45FA-9400-19267D73A568} = {0199FC71-0383-4DBC-A62F-56F6BF577956}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14F6EB66-D55E-46A8-8D85-1B7CFF211A1C}
+	EndGlobalSection
+EndGlobal

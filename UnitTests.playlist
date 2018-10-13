@@ -1,0 +1,15 @@
+<Playlist Version="1.0">
+	<Add Test="StakeMaster.Entities.SettingsTests.Constructor_AllParametersSet" />
+	<Add Test="StakeMaster.Entities.SettingsTests.Constructor_ParameterAddressIsNull" />
+	<Add Test="StakeMaster.Entities.StakeSettingsTests.Constructor_ParameterDedicatedStakingAddressIsNull" />
+	<Add Test="StakeMaster.Entities.SettingsTests.Constructor_ParameterStakeIsNull" />
+	<Add Test="StakeMaster.Entities.SettingsTests.Constructor_ParameterConnectionIsNull" />
+	<Add Test="StakeMaster.Entities.StakeSettingsTests.Constructor_ParameterdedicatedCollectionAddresIsNull" />
+	<Add Test="StakeMaster.Entities.StakeSettingsTests.Constructor_AllParametersSet" />
+	<Add Test="StakeMaster.Entities.ConnectionSettingsTests.Constructor_ParameterRpcUserIsNull" />
+	<Add Test="StakeMaster.Entities.ConnectionSettingsTests.Constructor_ParameterRpcPasswordIsNull" />
+	<Add Test="StakeMaster.Entities.ConnectionSettingsTests.Constructor_ParameterRpcUriIsNull" />
+	<Add Test="StakeMaster.Entities.OtherAddressSettingsTests.Constructor_ParameterAddressIsNull" />
+	<Add Test="StakeMaster.Entities.ConnectionSettingsTests.Constructor_AllParametersSet" />
+	<Add Test="StakeMaster.Entities.OtherAddressSettingsTests.Constructor_AllParametersSet" />
+</Playlist>

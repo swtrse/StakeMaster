@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>StakeMaster.BusinessLogic</RootNamespace>
+    <Copyright />
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StakeMasterCertificate.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyName>StakeMasterBL</AssemblyName>
+  </PropertyGroup>
+
+</Project>
