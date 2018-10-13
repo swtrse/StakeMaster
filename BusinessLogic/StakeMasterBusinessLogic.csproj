@@ -7,6 +7,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>StakeMasterCertificate.pfx</AssemblyOriginatorKeyFile>
     <AssemblyName>StakeMasterBL</AssemblyName>
+    <DocumentationFile>C:\Users\micha\source\repos\StakeMaster\BusinessLogic\StakeMasterBL.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

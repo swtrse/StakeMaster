@@ -8,4 +8,8 @@
     <AssemblyName>StakeMasterDA</AssemblyName>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\micha\source\repos\StakeMaster\DataAccess\StakeMasterDA.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

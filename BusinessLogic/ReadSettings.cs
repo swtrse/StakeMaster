@@ -1,6 +1,6 @@
 ﻿// ******************************* Module Header *******************************
 // Module Name: Class1.cs
-// Project:     StakeMasterDataAccess
+// Project:     StakeMasterBusinessLogic
 // Copyright (c) Michael Goldfinger.
 // 
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
@@ -8,7 +8,7 @@
 // WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 // *****************************************************************************
 
-namespace StakeMaster.DataAccess
+namespace StakeMaster.BusinessLogic
 {
-	public class Class1 { }
+	public class ReadSettings { }
 }
