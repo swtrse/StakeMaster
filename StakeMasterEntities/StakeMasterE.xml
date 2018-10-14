@@ -1,169 +1,183 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>StakeMasterE</name>
-	</assembly>
-	<members>
-		<member name="T:StakeMaster.ConnectionSettings">
-			<summary>
-				Contains settings for the connection to the wallet. This class cannot be inherited.
-			</summary>
-		</member>
-		<member name="M:StakeMaster.ConnectionSettings.#ctor(System.Uri,System.String,System.Security.SecureString)">
-			<summary>
-				Initialzes a new instance of the <see cref="T:StakeMaster.ConnectionSettings" /> class.
-			</summary>
-			<param name="rpcUri">The uri where the wallet is listening to connections.</param>
-			<param name="rpcUser">The user that is used for authentication.</param>
-			<param name="rpcPassword">The password that is used for authentication.</param>
-			<exception cref="T:System.ArgumentNullException">
-				<paramref name="rpcUri" /> is
-				<value>null</value>
-				.
-			</exception>
-			<exception cref="T:System.ArgumentNullException">
-				<paramref name="rpcUser" /> is
-				<value>null</value>
-				.
-			</exception>
-			<exception cref="T:System.ArgumentNullException">
-				<paramref name="rpcPassword" /> is
-				<value>null</value>
-				.
-			</exception>
-		</member>
-		<member name="P:StakeMaster.ConnectionSettings.RpcPassword">
-			<summary>
-				Gets the password for the authentication.
-			</summary>
-		</member>
-		<member name="P:StakeMaster.ConnectionSettings.RpcUri">
-			<summary>
-				Gets the uri for the connection.
-			</summary>
-		</member>
-		<member name="P:StakeMaster.ConnectionSettings.RpcUser">
-			<summary>
-				Gets the user for the authentication.
-			</summary>
-		</member>
-		<member name="T:StakeMaster.OtherAddressSettings">
-			<summary>
-				Contains settings for the processing of other addresses in the wallet. This class cannot be inherited.
-			</summary>
-		</member>
-		<member name="M:StakeMaster.OtherAddressSettings.#ctor(System.Boolean,System.String[])">
-			<summary>
-				Initialzes a new instance of the <see cref="T:StakeMaster.OtherAddressSettings" /> class.
-			</summary>
-			<param name="collectInputs">
-				Controls if wallet address inputs should be collected and moved to
-				<see cref="P:StakeMaster.StakeSettings.DedicatedCollectingAddress" />.
-			</param>
-			<param name="excludeAddresses">A list of addresses that are excluded from the move.</param>
-		</member>
-		<member name="P:StakeMaster.OtherAddressSettings.CollectInputs">
-			<summary>
-				When
-				<value>true</value>
-				inputs will be moved to the <see cref="P:StakeMaster.StakeSettings.DedicatedCollectingAddress" />.
-				When
-				<value>false</value>
-				no input will be moved.
-			</summary>
-		</member>
-		<member name="P:StakeMaster.OtherAddressSettings.ExcludeAddresses">
-			<summary>
-				Contains a list of addresses that will not be moved even if
-				<see cref="P:StakeMaster.OtherAddressSettings.CollectInputs" /> is
-				<value>true</value>
-				.
-			</summary>
-			<remarks>
-				<see cref="P:StakeMaster.StakeSettings.DedicatedCollectingAddress" /> and
-				<see cref="P:StakeMaster.StakeSettings.DedicatedStakingAddress" />
-				are automaicaly excluded from the move and must not be spezified explicitly.
-			</remarks>
-		</member>
-		<member name="T:StakeMaster.Settings">
-			<summary>
-				Contains all settings for the maintanace of a staking masternode coin.
-			</summary>
-		</member>
-		<member
-			name="M:StakeMaster.Settings.#ctor(StakeMaster.StakeSettings,StakeMaster.OtherAddressSettings,StakeMaster.ConnectionSettings)">
-			<summary>
-				Initialzes a new instance of the <see cref="T:StakeMaster.Settings" /> class.
-			</summary>
-			<param name="stake">The settings for stake maintanace.</param>
-			<param name="address">The settings for maintanace of other public addresses in the wallet.</param>
-			<param name="connection">The settings for the connection to the wallet.</param>
-			<exception cref="T:System.ArgumentNullException">
-				<paramref name="stake" /> is
-				<value>null</value>
-				.
-			</exception>
-			<exception cref="T:System.ArgumentNullException">
-				<paramref name="address" /> is
-				<value>null</value>
-				.
-			</exception>
-			<exception cref="T:System.ArgumentNullException">
-				<paramref name="connection" /> is
-				<value>null</value>
-				.
-			</exception>
-		</member>
-		<member name="P:StakeMaster.Settings.Address">
-			<summary>
-				Gets the <see cref="T:StakeMaster.OtherAddressSettings" /> values.
-			</summary>
-		</member>
-		<member name="P:StakeMaster.Settings.Connection">
-			<summary>
-				Gets the <see cref="T:StakeMaster.ConnectionSettings" /> values.
-			</summary>
-		</member>
-		<member name="P:StakeMaster.Settings.Stake">
-			<summary>
-				Gets the <see cref="T:StakeMaster.StakeSettings" /> values.
-			</summary>
-		</member>
-		<member name="T:StakeMaster.StakeSettings">
-			<summary>
-				Contains settings for the staking. This class cannot be inherited.
-			</summary>
-		</member>
-		<member name="M:StakeMaster.StakeSettings.#ctor(System.String,System.String)">
-			<summary>
-				Initialzes a new instance of the <see cref="T:StakeMaster.StakeSettings" /> class.
-			</summary>
-			<param name="dedicatedStakingAddress">The public address where all inputs for staking are located.</param>
-			<param name="dedicatedCollectingAddress">
-				The public addess where all inputs are stored temporarily till they get
-				processed.
-			</param>
-			<exception cref="T:System.ArgumentNullException">
-				<paramref name="dedicatedStakingAddress" /> is
-				<value>null</value>
-				.
-			</exception>
-			<exception cref="T:System.ArgumentNullException">
-				<paramref name="dedicatedCollectingAddress" /> is
-				<value>null</value>
-				.
-			</exception>
-		</member>
-		<member name="P:StakeMaster.StakeSettings.DedicatedCollectingAddress">
-			<summary>
-				Gets the public address where inputs are stored temporarily during the maintanance process.
-			</summary>
-		</member>
-		<member name="P:StakeMaster.StakeSettings.DedicatedStakingAddress">
-			<summary>
-				Gets the public address where all inputs fore staking are located.
-			</summary>
-		</member>
-	</members>
+    <assembly>
+        <name>StakeMasterE</name>
+    </assembly>
+    <members>
+        <member name="T:StakeMaster.ConnectionSettings">
+            <summary>
+                Contains settings for the connection to the wallet. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:StakeMaster.ConnectionSettings.#ctor(System.Uri,System.String,System.Security.SecureString)">
+            <summary>
+                Initialzes a new instance of the <see cref="T:StakeMaster.ConnectionSettings" /> class.
+            </summary>
+            <param name="rpcUri">The uri where the wallet is listening to connections.</param>
+            <param name="rpcUser">The user that is used for authentication.</param>
+            <param name="rpcPassword">The password that is used for authentication.</param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="rpcUri" /> is
+                <value>null</value>
+                .
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="rpcUser" /> is
+                <value>null</value>
+                .
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="rpcPassword" /> is
+                <value>null</value>
+                .
+            </exception>
+        </member>
+        <member name="P:StakeMaster.ConnectionSettings.RpcPassword">
+            <summary>
+                Gets the password for the authentication.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.ConnectionSettings.RpcUri">
+            <summary>
+                Gets the uri for the connection.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.ConnectionSettings.RpcUser">
+            <summary>
+                Gets the user for the authentication.
+            </summary>
+        </member>
+        <member name="T:StakeMaster.OtherAddressSettings">
+            <summary>
+                Contains settings for the processing of other addresses in the wallet. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:StakeMaster.OtherAddressSettings.#ctor(System.Boolean,System.String[])">
+            <summary>
+                Initialzes a new instance of the <see cref="T:StakeMaster.OtherAddressSettings" /> class.
+            </summary>
+            <param name="collectInputs">
+                Controls if wallet address inputs should be collected and moved to
+                <see cref="P:StakeMaster.StakeSettings.DedicatedCollectingAddress" />.
+            </param>
+            <param name="excludeAddresses">A list of addresses that are excluded from the move.</param>
+        </member>
+        <member name="P:StakeMaster.OtherAddressSettings.CollectInputs">
+            <summary>
+                When
+                <value>true</value>
+                inputs will be moved to the <see cref="P:StakeMaster.StakeSettings.DedicatedCollectingAddress" />.
+                When
+                <value>false</value>
+                no input will be moved.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.OtherAddressSettings.ExcludeAddresses">
+            <summary>
+                Contains a list of addresses that will not be moved even if <see cref="P:StakeMaster.OtherAddressSettings.CollectInputs" /> is
+                <value>true</value>
+                .
+            </summary>
+            <remarks>
+                <see cref="P:StakeMaster.StakeSettings.DedicatedCollectingAddress" /> and <see cref="P:StakeMaster.StakeSettings.DedicatedStakingAddress" />
+                are automaicaly excluded from the move and must not be spezified explicitly.
+            </remarks>
+        </member>
+        <member name="T:StakeMaster.Settings">
+            <summary>
+                Contains all settings for the maintanace of a staking masternode coin.
+            </summary>
+        </member>
+        <member name="M:StakeMaster.Settings.#ctor(StakeMaster.StakeSettings,StakeMaster.OtherAddressSettings,StakeMaster.ConnectionSettings)">
+            <summary>
+                Initialzes a new instance of the <see cref="T:StakeMaster.Settings" /> class.
+            </summary>
+            <param name="stake">The settings for stake maintanace.</param>
+            <param name="address">The settings for maintanace of other public addresses in the wallet.</param>
+            <param name="connection">The settings for the connection to the wallet.</param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="stake" /> is
+                <value>null</value>
+                .
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="address" /> is
+                <value>null</value>
+                .
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="connection" /> is
+                <value>null</value>
+                .
+            </exception>
+        </member>
+        <member name="P:StakeMaster.Settings.Address">
+            <summary>
+                Gets the <see cref="T:StakeMaster.OtherAddressSettings" /> values.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.Settings.Connection">
+            <summary>
+                Gets the <see cref="T:StakeMaster.ConnectionSettings" /> values.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.Settings.Stake">
+            <summary>
+                Gets the <see cref="T:StakeMaster.StakeSettings" /> values.
+            </summary>
+        </member>
+        <member name="T:StakeMaster.StakeSettings">
+            <summary>
+                Contains settings for the staking. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:StakeMaster.StakeSettings.#ctor(System.Boolean,System.String,System.String,System.Int32)">
+            <summary>
+                Initialzes a new instance of the <see cref="T:StakeMaster.StakeSettings" /> class.
+            </summary>
+            <param name="editStakes">Enables or disables the processing of <see cref="P:StakeMaster.StakeSettings.DedicatedStakingAddress" /> inputs.</param>
+            <param name="dedicatedStakingAddress">The public address where all inputs for staking are located.</param>
+            <param name="dedicatedCollectingAddress">
+                The public addess where all inputs are stored temporarily till they get
+                processed.
+            </param>
+            <param name="stakingPatience">The number of days where an input should stake at least once.</param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="dedicatedStakingAddress" /> is
+                <value>null</value>
+                .
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="dedicatedCollectingAddress" /> is
+                <value>null</value>
+                .
+            </exception>
+        </member>
+        <member name="P:StakeMaster.StakeSettings.DedicatedCollectingAddress">
+            <summary>
+                Gets the public address where inputs are stored temporarily during the maintanance process.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.StakeSettings.DedicatedStakingAddress">
+            <summary>
+                Gets the public address where all inputs fore staking are located.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.StakeSettings.EditStakes">
+            <summary>
+                If
+                <value>true</value>
+                inputs of the <see cref="P:StakeMaster.StakeSettings.DedicatedStakingAddress" /> will be edited and new inputs will be created if there are
+                enough coins.
+                If
+                <value>false</value>
+                no changes will be made to Inputs of the <see cref="P:StakeMaster.StakeSettings.DedicatedStakingAddress" />.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.StakeSettings.StakingPatience">
+            <summary>
+                Gets the number of days during an input should at least stake one time.
+            </summary>
+        </member>
+    </members>
 </doc>

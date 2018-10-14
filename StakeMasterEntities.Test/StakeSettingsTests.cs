@@ -25,11 +25,15 @@ namespace StakeMaster.Entities
 			//Arrange
 			const string dedicatedStakingAddress = "DummyStakeAddress";
 			const string dedicatedCollectionAddres = "DummyCollectingAddress";
+			const int stakingPatience = 7;
+			const bool editStakes = true;
 			//Act
-			var result = new StakeSettings(dedicatedStakingAddress, dedicatedCollectionAddres);
+			var result = new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience);
 			//Assert
 			Assert.AreEqual(dedicatedStakingAddress, result.DedicatedStakingAddress);
 			Assert.AreSame(dedicatedCollectionAddres, result.DedicatedCollectingAddress);
+			Assert.AreEqual(stakingPatience, result.StakingPatience);
+			Assert.AreEqual(editStakes, result.EditStakes);
 		}
 
 		[TestMethod]
@@ -41,8 +45,10 @@ namespace StakeMaster.Entities
 			//Arrange
 			const string dedicatedStakingAddress = "DummyStakeAddress";
 			const string dedicatedCollectionAddres = null;
+			const int stakingPatience = 7;
+			const bool editStakes = true;
 			//Act
-			new StakeSettings(dedicatedStakingAddress, dedicatedCollectionAddres);
+			new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience);
 			//Assert
 			//Will be handled through ExpectedException.
 		}
@@ -56,8 +62,10 @@ namespace StakeMaster.Entities
 			//Arrange
 			const string dedicatedStakingAddress = null;
 			const string dedicatedCollectionAddres = "DummyCollectingAddress";
+			const int stakingPatience = 7;
+			const bool editStakes = true;
 			//Act
-			new StakeSettings(dedicatedStakingAddress, dedicatedCollectionAddres);
+			new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience);
 			//Assert
 			//Will be handled through ExpectedException.
 		}

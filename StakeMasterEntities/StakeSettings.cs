@@ -22,11 +22,13 @@ namespace StakeMaster
 		/// <summary>
 		///     Initialzes a new instance of the <see cref="StakeSettings" /> class.
 		/// </summary>
+		/// <param name="editStakes">Enables or disables the processing of <see cref="DedicatedStakingAddress" /> inputs.</param>
 		/// <param name="dedicatedStakingAddress">The public address where all inputs for staking are located.</param>
 		/// <param name="dedicatedCollectingAddress">
 		///     The public addess where all inputs are stored temporarily till they get
 		///     processed.
 		/// </param>
+		/// <param name="stakingPatience">The number of days where an input should stake at least once.</param>
 		/// <exception cref="ArgumentNullException">
 		///     <paramref name="dedicatedStakingAddress" /> is
 		///     <value>null</value>
@@ -37,10 +39,12 @@ namespace StakeMaster
 		///     <value>null</value>
 		///     .
 		/// </exception>
-		public StakeSettings([NotNull] string dedicatedStakingAddress, [NotNull] string dedicatedCollectingAddress)
+		public StakeSettings(bool editStakes, [NotNull] string dedicatedStakingAddress, [NotNull] string dedicatedCollectingAddress, int stakingPatience)
 		{
 			DedicatedStakingAddress = dedicatedStakingAddress ?? throw new ArgumentNullException(nameof(dedicatedStakingAddress));
 			DedicatedCollectingAddress = dedicatedCollectingAddress ?? throw new ArgumentNullException(nameof(dedicatedCollectingAddress));
+			StakingPatience = stakingPatience;
+			EditStakes = editStakes;
 		}
 
 		/// <summary>
@@ -54,5 +58,21 @@ namespace StakeMaster
 		/// </summary>
 		[NotNull]
 		public string DedicatedStakingAddress { get; }
+
+		/// <summary>
+		///     If
+		///     <value>true</value>
+		///     inputs of the <see cref="DedicatedStakingAddress" /> will be edited and new inputs will be created if there are
+		///     enough coins.
+		///     If
+		///     <value>false</value>
+		///     no changes will be made to Inputs of the <see cref="DedicatedStakingAddress" />.
+		/// </summary>
+		public bool EditStakes { get; }
+
+		/// <summary>
+		///     Gets the number of days during an input should at least stake one time.
+		/// </summary>
+		public int StakingPatience { get; }
 	}
 }
