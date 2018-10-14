@@ -10,5 +10,8 @@
 
 namespace StakeMaster.DataAccess
 {
+	/// <summary>
+	/// Contains methods for file and wallet read and write operations.
+	/// </summary>
 	public class AccessSettingFile { }
 }

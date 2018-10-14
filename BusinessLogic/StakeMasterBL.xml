@@ -4,5 +4,122 @@
         <name>StakeMasterBL</name>
     </assembly>
     <members>
+        <member name="T:StakeMaster.BusinessLogic.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsArgumentInvalid_Argument_Name">
+            <summary>
+              Looks up a localized string similar to Argument:.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsArgumentInvalid_Generic">
+            <summary>
+              Looks up a localized string similar to The argument given is invalid or unknown in the current context..
+            </summary>
+        </member>
+        <member name="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException">
+            <summary>Represents errors that occur when unexpected arguments are found.</summary>
+            <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException" /> class.
+            </summary>
+            <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.#ctor(System.String)">
+            <summary>
+                Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException" /> class.
+            </summary>
+            <param name="argument">
+                The argument that causes the exception.
+            </param>
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.#ctor(System.String,System.Exception)">
+            <summary>
+                Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException" /> class.
+            </summary>
+            <param name="argument">
+                The argument that causes the exception.
+            </param>
+            <param name="innerException">
+                The exception that is the cause of the current exception, or a null reference (
+                <value>Nothing</value>
+                in Visual Basic) if no inner exception is specified.
+            </param>
+            <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.#ctor(System.String,System.String)">
+            <summary>
+                Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException" /> class.
+            </summary>
+            <param name="argument">
+                The argument that causes the exception.
+            </param>
+            <param name="message">
+                The custom message that describes the error.
+            </param>
+            <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+                Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException" /> class.
+            </summary>
+            <param name="argument">
+                The argument that raised this exception.
+            </param>
+            <param name="message">
+                The custom message that describes the error.
+            </param>
+            <param name="innerException">
+                The exception that is the cause of the current exception, or a null reference (
+                <value>Nothing</value>
+                in Visual Basic) if no inner exception is specified.
+            </param>
+            <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc />
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.Argument">
+            <summary>
+                Holds the argument that causes the exception.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.Message">
+            <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.SettingsArgumentInvalidException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:StakeMaster.BusinessLogic.SettingsHelper">
+            <summary>
+            Contains methods for initializing and check settings.
+            </summary>
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.SettingsHelper.Read(System.String[])">
+            <summary>
+            Returns the settings based on the arguments given.
+            </summary>
+            <param name="args">
+            Arguments that are considered when generating the settings.
+            </param>
+            <returns>
+            Returns a <see cref="T:StakeMaster.Settings"/>-object with all properties set based on the given arguments.
+            </returns>
+        </member>
     </members>
 </doc>

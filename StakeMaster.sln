@@ -3,25 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMaster", "StakeMaster\StakeMaster.csproj", "{5D8C1365-EEB5-457C-BE8D-D9A141FF29CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StakeMaster", "StakeMaster\StakeMaster.csproj", "{5D8C1365-EEB5-457C-BE8D-D9A141FF29CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterBusinessLogic", "BusinessLogic\StakeMasterBusinessLogic.csproj", "{6FFD3D81-66A0-4605-8F25-4C15E6147C1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StakeMasterBusinessLogic", "BusinessLogic\StakeMasterBusinessLogic.csproj", "{6FFD3D81-66A0-4605-8F25-4C15E6147C1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterDataAccess", "DataAccess\StakeMasterDataAccess.csproj", "{1DEF554F-1BE6-4128-999B-AE43DF989FB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StakeMasterDataAccess", "DataAccess\StakeMasterDataAccess.csproj", "{1DEF554F-1BE6-4128-999B-AE43DF989FB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterEntities", "StakeMasterEntities\StakeMasterEntities.csproj", "{EC4B5328-D29A-4181-9BB7-D48E430A93D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StakeMasterEntities", "StakeMasterEntities\StakeMasterEntities.csproj", "{EC4B5328-D29A-4181-9BB7-D48E430A93D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3B9AE93-2330-4863-93AD-50357C9035FD}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		README.md = README.md
 		IntegrationTests.playlist = IntegrationTests.playlist
+		README.md = README.md
 		UnitTests.playlist = UnitTests.playlist
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0199FC71-0383-4DBC-A62F-56F6BF577956}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0199FC71-0383-4DBC-A62F-56F6BF577956}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterEntities.Test", "StakeMasterEntities.Test\StakeMasterEntities.Test.csproj", "{3FD6D60A-6D3C-45FA-9400-19267D73A568}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StakeMasterEntities.Test", "StakeMasterEntities.Test\StakeMasterEntities.Test.csproj", "{3FD6D60A-6D3C-45FA-9400-19267D73A568}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterBussinessLogic.Test", "StakeMasterBussinessLogic.Test\StakeMasterBussinessLogic.Test.csproj", "{4D95A794-160C-49D5-9D3D-18D3C238968D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,12 +51,17 @@ Global
 		{3FD6D60A-6D3C-45FA-9400-19267D73A568}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD6D60A-6D3C-45FA-9400-19267D73A568}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD6D60A-6D3C-45FA-9400-19267D73A568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D95A794-160C-49D5-9D3D-18D3C238968D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D95A794-160C-49D5-9D3D-18D3C238968D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D95A794-160C-49D5-9D3D-18D3C238968D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D95A794-160C-49D5-9D3D-18D3C238968D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3FD6D60A-6D3C-45FA-9400-19267D73A568} = {0199FC71-0383-4DBC-A62F-56F6BF577956}
+		{4D95A794-160C-49D5-9D3D-18D3C238968D} = {0199FC71-0383-4DBC-A62F-56F6BF577956}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14F6EB66-D55E-46A8-8D85-1B7CFF211A1C}

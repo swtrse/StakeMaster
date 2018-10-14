@@ -10,13 +10,13 @@
 
 namespace StakeMaster
 {
-	using System;
+	using BusinessLogic;
 
 	internal class Program
 	{
 		private static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World! Just try verified Commits. 3");
+			Settings settings = SettingsHelper.Read(args);
 		}
 	}
 }
