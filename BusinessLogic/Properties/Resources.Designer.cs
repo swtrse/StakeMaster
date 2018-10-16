@@ -63,18 +63,45 @@ namespace StakeMaster.BusinessLogic.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Argument:.
         /// </summary>
-        internal static string SettingsArgumentInvalid_Argument_Name {
+        internal static string SettingsArgumentInvalidException_Argument_Name {
             get {
-                return ResourceManager.GetString("SettingsArgumentInvalid_Argument_Name", resourceCulture);
+                return ResourceManager.GetString("SettingsArgumentInvalidException_Argument_Name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The argument given is invalid or unknown in the current context..
         /// </summary>
-        internal static string SettingsArgumentInvalid_Generic {
+        internal static string SettingsArgumentInvalidException_Generic {
             get {
-                return ResourceManager.GetString("SettingsArgumentInvalid_Generic", resourceCulture);
+                return ResourceManager.GetString("SettingsArgumentInvalidException_Generic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StakeMaster commandline arguments:.
+        /// </summary>
+        internal static string SettingsHelper_DisplayHelp_Header {
+            get {
+                return ResourceManager.GetString("SettingsHelper_DisplayHelp_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}{1}Please check your settings..
+        /// </summary>
+        internal static string SettingsHelper_DisplayHelp_InvalidArgument_Text {
+            get {
+                return ResourceManager.GetString("SettingsHelper_DisplayHelp_InvalidArgument_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General settings{0}-? or --help: Displays this help{0}{0}Settings regarding the stake function{0}-s=&lt;true/false&gt; or --stakes=&lt;true/false&gt;  : Enables or disables modifications of inputs at the stake address. Default: true{0}-a=&lt;address&gt; or --stakeaddress=&lt;addres&gt;   : Sets the dedicated stake address. Mandatory.{0}-c=&lt;address&gt; or --collectaddress=&lt;address&gt;: Sets the dedicated collect address. Mandatory.{0}{0}Settings regarding all other addresses in the wallet{0}-i=&lt;true/false&gt; or --collectinputs=&lt;true/false&gt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHelper_DisplayHelp_Text {
+            get {
+                return ResourceManager.GetString("SettingsHelper_DisplayHelp_Text", resourceCulture);
             }
         }
     }

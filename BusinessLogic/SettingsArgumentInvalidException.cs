@@ -26,7 +26,7 @@ namespace StakeMaster.BusinessLogic
 		///     Initializes a new instance of the <see cref="SettingsArgumentInvalidException" /> class.
 		/// </summary>
 		/// <inheritdoc />
-		public SettingsArgumentInvalidException() : base(Resources.SettingsArgumentInvalid_Generic) { }
+		public SettingsArgumentInvalidException() : base(Resources.SettingsArgumentInvalidException_Generic) { }
 
 		/// <summary>
 		///     Initializes a new instance of the <see cref="SettingsArgumentInvalidException" /> class.
@@ -34,7 +34,7 @@ namespace StakeMaster.BusinessLogic
 		/// <param name="argument">
 		///     The argument that causes the exception.
 		/// </param>
-		public SettingsArgumentInvalidException(string argument) : base(Resources.SettingsArgumentInvalid_Generic)
+		public SettingsArgumentInvalidException(string argument) : base(Resources.SettingsArgumentInvalidException_Generic)
 		{
 			Argument = argument;
 		}
@@ -51,7 +51,7 @@ namespace StakeMaster.BusinessLogic
 		///     in Visual Basic) if no inner exception is specified.
 		/// </param>
 		/// <inheritdoc />
-		public SettingsArgumentInvalidException(string argument, Exception innerException) : base(Resources.SettingsArgumentInvalid_Generic, innerException)
+		public SettingsArgumentInvalidException(string argument, Exception innerException) : base(Resources.SettingsArgumentInvalidException_Generic, innerException)
 		{
 			Argument = argument;
 		}
@@ -108,7 +108,7 @@ namespace StakeMaster.BusinessLogic
 			get
 			{
 				string s = base.Message;
-				return string.IsNullOrEmpty(Argument) ? s : $"{s}{Environment.NewLine}{Resources.SettingsArgumentInvalid_Argument_Name} {Argument}";
+				return string.IsNullOrEmpty(Argument) ? s : $"{s}{Environment.NewLine}{Resources.SettingsArgumentInvalidException_Argument_Name} {Argument}";
 			}
 		}
 

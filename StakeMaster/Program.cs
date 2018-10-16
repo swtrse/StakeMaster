@@ -20,7 +20,7 @@ namespace StakeMaster
 
 	internal class Program
 	{
-		public static IConfiguration Configuration { get; set; } = InitializeAppSettings();
+		public static IConfiguration Configuration { get; } = InitializeAppSettings();
 
 		private static void Main(string[] args)
 		{
@@ -28,7 +28,7 @@ namespace StakeMaster
 			{
 				InitializeAppSettings();
 				InitializeLogging();
-				//Settings settings = SettingsHelper.Read(args);
+				Settings settings = SettingsHelper.Read(args);
 				Log.Verbose("Trace");
 				Log.Debug("Debug");
 				Log.Information("Info");

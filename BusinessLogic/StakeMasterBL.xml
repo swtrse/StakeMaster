@@ -20,14 +20,29 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsArgumentInvalid_Argument_Name">
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsArgumentInvalidException_Argument_Name">
             <summary>
               Looks up a localized string similar to Argument:.
             </summary>
         </member>
-        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsArgumentInvalid_Generic">
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsArgumentInvalidException_Generic">
             <summary>
               Looks up a localized string similar to The argument given is invalid or unknown in the current context..
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsHelper_DisplayHelp_Header">
+            <summary>
+              Looks up a localized string similar to StakeMaster commandline arguments:.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsHelper_DisplayHelp_InvalidArgument_Text">
+            <summary>
+              Looks up a localized string similar to {0}{1}Please check your settings..
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsHelper_DisplayHelp_Text">
+            <summary>
+              Looks up a localized string similar to General settings{0}-? or --help: Displays this help{0}{0}Settings regarding the stake function{0}-s=&lt;true/false&gt; or --stakes=&lt;true/false&gt;  : Enables or disables modifications of inputs at the stake address. Default: true{0}-a=&lt;address&gt; or --stakeaddress=&lt;addres&gt;   : Sets the dedicated stake address. Mandatory.{0}-c=&lt;address&gt; or --collectaddress=&lt;address&gt;: Sets the dedicated collect address. Mandatory.{0}{0}Settings regarding all other addresses in the wallet{0}-i=&lt;true/false&gt; or --collectinputs=&lt;true/false&gt; [rest of string was truncated]&quot;;.
             </summary>
         </member>
         <member name="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException">

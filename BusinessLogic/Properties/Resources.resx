@@ -117,10 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SettingsArgumentInvalid_Argument_Name" xml:space="preserve">
+  <data name="SettingsArgumentInvalidException_Argument_Name" xml:space="preserve">
     <value>Argument:</value>
   </data>
-  <data name="SettingsArgumentInvalid_Generic" xml:space="preserve">
+  <data name="SettingsArgumentInvalidException_Generic" xml:space="preserve">
     <value>The argument given is invalid or unknown in the current context.</value>
+  </data>
+  <data name="SettingsHelper_DisplayHelp_InvalidArgument_Text" xml:space="preserve">
+    <value>{0}{1}Please check your settings.</value>
+  </data>
+  <data name="SettingsHelper_DisplayHelp_Text" xml:space="preserve">
+    <value>General settings{0}-? or --help: Displays this help{0}{0}Settings regarding the stake function{0}-s=&lt;true/false&gt; or --stakes=&lt;true/false&gt;  : Enables or disables modifications of inputs at the stake address. Default: true{0}-a=&lt;address&gt; or --stakeaddress=&lt;addres&gt;   : Sets the dedicated stake address. Mandatory.{0}-c=&lt;address&gt; or --collectaddress=&lt;address&gt;: Sets the dedicated collect address. Mandatory.{0}{0}Settings regarding all other addresses in the wallet{0}-i=&lt;true/false&gt; or --collectinputs=&lt;true/false&gt;            : Moves all inputs from other addresses to the collect address. Default: true{0}-e=&lt;adr_1&gt;{{,&lt;adr_n&gt;}} or --excludeaddress==&lt;adr_1&gt;{{,&lt;adr_n&gt;}}: Comma seperated list of addresses that will be excluded.{0}{0}Settings regarding the rpc connection to the wallet{0}-u=&lt;user&gt; or --user=&lt;user&gt;            : The user for the rpc connection. Mandatory.{0}-p=&lt;password&gt; or --password=&lt;password&gt;: The password for the rpc connection. Mandatory.{0}-o=&lt;uri&gt; or --uri=&lt;uri&gt;                : The uri for the rpc connection. Mandatory.{0}</value>
+  </data>
+  <data name="SettingsHelper_DisplayHelp_Header" xml:space="preserve">
+    <value>StakeMaster commandline arguments:</value>
   </data>
 </root>
