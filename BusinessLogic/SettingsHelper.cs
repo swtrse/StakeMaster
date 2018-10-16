@@ -45,5 +45,10 @@ namespace StakeMaster.BusinessLogic
 				throw new SettingsArgumentInvalidException();
 			}
 		}
+
+		public static void DisplayHelp(string message)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

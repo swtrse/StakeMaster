@@ -10,13 +10,38 @@
 
 namespace StakeMaster
 {
+	using System;
+	using System.IO;
+	using System.Reflection;
 	using BusinessLogic;
+	using NLog;
 
 	internal class Program
 	{
+		private static readonly ILogger Logger = LogManager.GetLogger(typeof(Program).FullName);
 		private static void Main(string[] args)
 		{
-			Settings settings = SettingsHelper.Read(args);
+			try
+			{
+				InitializeLogging();
+				//Settings settings = SettingsHelper.Read(args);
+				Logger.Log(LogLevel.Trace, "Trace");
+				Logger.Log(LogLevel.Debug, "Debug");
+				Logger.Log(LogLevel.Info, "Info");
+				Logger.Log(LogLevel.Warn, "Warning");
+				Logger.Log(LogLevel.Error, "Error", new Exception("xxx"));
+				Logger.Log(LogLevel.Fatal, "Critical");
+			}
+			catch (SettingsArgumentInvalidException e)
+			{
+				SettingsHelper.DisplayHelp(e.Message);
+			}
+		}
+
+		private static void InitializeLogging()
+		{
+			LogManager.LoadConfiguration("NLog.config");
+			LogManager.ReconfigExistingLoggers();
 		}
 	}
 }
