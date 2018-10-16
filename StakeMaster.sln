@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		IntegrationTests.playlist = IntegrationTests.playlist
+		log4net.xsd = log4net.xsd
 		README.md = README.md
 		UnitTests.playlist = UnitTests.playlist
 	EndProjectSection
@@ -23,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0199FC71
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StakeMasterEntities.Test", "StakeMasterEntities.Test\StakeMasterEntities.Test.csproj", "{3FD6D60A-6D3C-45FA-9400-19267D73A568}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StakeMasterBussinessLogic.Test", "StakeMasterBussinessLogic.Test\StakeMasterBussinessLogic.Test.csproj", "{4D95A794-160C-49D5-9D3D-18D3C238968D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StakeMasterBussinessLogic.Test", "StakeMasterBussinessLogic.Test\StakeMasterBussinessLogic.Test.csproj", "{4D95A794-160C-49D5-9D3D-18D3C238968D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

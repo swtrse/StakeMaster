@@ -81,12 +81,13 @@ namespace StakeMasterBussinessLogic.Test
 
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
+		[SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
 		public void Constructor_GetObjectData_InfoIsNull()
 		{
 			// Arrange
-			var sut = new SettingsArgumentInvalidException("-dummy", "message");
+			var result = new SettingsArgumentInvalidException("-dummy", "message");
 			// Act
-			sut.GetObjectData(null, new StreamingContext());
+			result.GetObjectData(null, new StreamingContext());
 			// Assert
 			// [ExpectedException(typeof(ArgumentNullException))]
 		}
