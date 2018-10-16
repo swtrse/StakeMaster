@@ -42,6 +42,10 @@ namespace StakeMaster
 			{
 				SettingsHelper.DisplayHelp(e.Message);
 			}
+			catch (Exception e)
+			{
+				Log.Fatal(e, "An unexpected error occured. The application will be terminated.");
+			}
 			finally
 			{
 				Log.CloseAndFlush();
