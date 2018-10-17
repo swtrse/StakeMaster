@@ -14,7 +14,6 @@ namespace StakeMaster.BusinessLogic
 	using System.Linq;
 	using JetBrains.Annotations;
 	using Properties;
-	using Serilog;
 
 	/// <summary>
 	///     Contains methods for initializing and check settings.
@@ -107,7 +106,7 @@ namespace StakeMaster.BusinessLogic
 					return new string[0];
 				}
 				string[] ret = (arg ?? arg2).Split(',');
-				return ret;
+				return ret.Where(r => !string.IsNullOrEmpty(r)).ToArray();
 			}
 			catch (Exception e)
 			{
@@ -191,19 +190,17 @@ namespace StakeMaster.BusinessLogic
 
 			ReadHelpSettings(args);
 			StakeSettings stakeSettings = ReadStakeSettings(args);
-			OtherAddressSettings otherAddressSetings = ReadOtherAddressSettings(args);
+			OtherAddressSettings otherAddressSetings = ReadOtherAddressSettings(args, stakeSettings.DedicatedStakingAddress, stakeSettings.DedicatedCollectingAddress);
 			ConnectionSettings connectionSettings = ReadConnectionSettings(args);
-			var settings = new Settings(stakeSettings, otherAddressSetings, connectionSettings);
-			return settings;
+			return new Settings(stakeSettings, otherAddressSetings, connectionSettings);
 		}
 
 		[NotNull]
 		private static ConnectionSettings ReadConnectionSettings([NotNull] string[] args)
 		{
-			var settings = new ConnectionSettings(ExtractArgumentUriValue(args, "-o=", "--uri="),
+			return new ConnectionSettings(ExtractArgumentUriValue(args, "-o=", "--uri="),
 			                              ExtractArgumentStringValue(args, "-u=", "--user="),
 			                              ExtractArgumentStringValue(args, "-p=", "--password="));
-			return settings;
 		}
 
 		private static void ReadHelpSettings([NotNull] string[] args)
@@ -215,20 +212,20 @@ namespace StakeMaster.BusinessLogic
 		}
 
 		[NotNull]
-		private static OtherAddressSettings ReadOtherAddressSettings([NotNull] string[] args)
+		private static OtherAddressSettings ReadOtherAddressSettings([NotNull] string[] args, string dedicatedStakingAddress, string dedicatedCollectingAddress)
 		{
-			var settings = new OtherAddressSettings(ExtractArgumentBoolValue(args, "-i=", "--collectinputs=", true), ExtractArgumentStringArrayValue(args, "-e=", "--excludeaddress="));
-			return settings;
+			string[] excludes = ExtractArgumentStringArrayValue(args, "-e=", "--excludeaddress=");
+			excludes = excludes.Concat(new[] {dedicatedStakingAddress, dedicatedCollectingAddress}).ToArray();
+			return new OtherAddressSettings(ExtractArgumentBoolValue(args, "-i=", "--collectinputs=", true), excludes);
 		}
 
 		[NotNull]
 		private static StakeSettings ReadStakeSettings([NotNull] string[] args)
 		{
-			var settings = new StakeSettings(ExtractArgumentBoolValue(args, "-s=", "--stakes=", true),
+			return new StakeSettings(ExtractArgumentBoolValue(args, "-s=", "--stakes=", true),
 			                         ExtractArgumentStringValue(args, "-a=", "--stakeaddress="),
 			                         ExtractArgumentStringValue(args, "-c=", "--collectaddress="),
 			                         ExtractArgumentIntValue(args, "-w=", "--patience=", 7));
-			return settings;
 		}
 	}
 }
