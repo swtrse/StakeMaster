@@ -31,6 +31,11 @@ namespace StakeMaster
 				Log.Verbose("Command line arguments: {@args}", args);
 				Log.Debug("Parse command line arguments...");
 				Settings settings = SettingsHelper.Read(args);
+				//TODO: Calculate Transaction Size
+				//TODO: Move Inputs to Collection Address
+				//TODO: Move Dust from Staking Address
+				//TODO: Compress Collect Address
+				//TODO: Generate new Staking Input
 				Log.Verbose("Settings: {@settings}", settings);
 			}
 			catch (SettingsArgumentInvalidException e)

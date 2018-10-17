@@ -1,4 +1,14 @@
-﻿namespace StakeMasterBussinessLogic.Test
+﻿// ******************************* Module Header *******************************
+// Module Name: SettingsHelperTests.cs
+// Project:     StakeMasterBussinessLogic.Test
+// Copyright (c) Michael Goldfinger.
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// *****************************************************************************
+
+namespace StakeMasterBussinessLogic.Test
 {
 	using System;
 	using System.Diagnostics.CodeAnalysis;
@@ -135,7 +145,6 @@
 			{
 				Assert.IsTrue(result.Address.ExcludeAddresses.Contains(adr));
 			}
-
 			Assert.AreEqual(user, result.Connection.RpcUser);
 			Assert.AreEqual(password, result.Connection.RpcPassword);
 			Assert.AreEqual(expectedUri, result.Connection.RpcUri);
@@ -167,7 +176,6 @@
 			{
 				Assert.IsTrue(result.Address.ExcludeAddresses.Contains(adr));
 			}
-
 			Assert.AreEqual(user, result.Connection.RpcUser);
 			Assert.AreEqual(password, result.Connection.RpcPassword);
 			Assert.AreEqual(expectedUri, result.Connection.RpcUri);
@@ -204,7 +212,6 @@
 				Assert.AreEqual(string.Empty, e.Argument);
 				throw;
 			}
-
 			//Assert
 			//[ExpectedException(typeof(SettingsArgumentInvalidException))]
 		}
@@ -252,7 +259,6 @@
 				Assert.AreEqual(argument, e.Argument);
 				throw;
 			}
-
 			//Assert
 			//[ExpectedException(typeof(SettingsArgumentInvalidException))]
 		}
@@ -278,7 +284,6 @@
 				Assert.AreEqual(argument, e.Argument);
 				throw;
 			}
-
 			//Assert
 			//[ExpectedException(typeof(SettingsArgumentInvalidException))]
 		}
