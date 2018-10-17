@@ -153,6 +153,7 @@
             <returns>
                 Returns a <see cref="T:StakeMaster.Settings" />-object with all properties set based on the given arguments.
             </returns>
+            <exception cref="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException">Will be thrown when arguments cannot be parsed.</exception>
         </member>
     </members>
 </doc>

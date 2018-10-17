@@ -14,6 +14,7 @@ namespace StakeMaster.BusinessLogic
 	using System.Linq;
 	using JetBrains.Annotations;
 	using Properties;
+	using Serilog;
 
 	/// <summary>
 	///     Contains methods for initializing and check settings.
@@ -54,7 +55,8 @@ namespace StakeMaster.BusinessLogic
 					return defaultValue;
 				}
 
-				return arg != null ? bool.Parse(arg) : bool.Parse(arg2);
+				bool ret = arg != null ? bool.Parse(arg) : bool.Parse(arg2);
+				return ret;
 			}
 			catch (Exception e)
 			{
@@ -78,8 +80,8 @@ namespace StakeMaster.BusinessLogic
 				{
 					return defaultValue;
 				}
-
-				return arg != null ? int.Parse(arg) : int.Parse(arg2);
+				int ret = arg != null ? int.Parse(arg) : int.Parse(arg2);
+				return ret;
 			}
 			catch (Exception e)
 			{
@@ -104,8 +106,8 @@ namespace StakeMaster.BusinessLogic
 				{
 					return new string[0];
 				}
-
-				return (arg ?? arg2).Split(',');
+				string[] ret = (arg ?? arg2).Split(',');
+				return ret;
 			}
 			catch (Exception e)
 			{
@@ -132,7 +134,8 @@ namespace StakeMaster.BusinessLogic
 					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotDefined_Message);
 				}
 
-				return arg ?? arg2;
+				string ret = arg ?? arg2;
+				return ret;
 			}
 			catch (Exception e)
 			{
@@ -159,7 +162,8 @@ namespace StakeMaster.BusinessLogic
 					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotDefined_Message);
 				}
 
-				return new Uri(arg ?? arg2, UriKind.Absolute);
+				var ret = new Uri(arg ?? arg2, UriKind.Absolute);
+				return ret;
 			}
 			catch (Exception e)
 			{
@@ -176,6 +180,7 @@ namespace StakeMaster.BusinessLogic
 		/// <returns>
 		///     Returns a <see cref="Settings" />-object with all properties set based on the given arguments.
 		/// </returns>
+		/// <exception cref="SettingsArgumentInvalidException">Will be thrown when arguments cannot be parsed.</exception>
 		[NotNull]
 		public static Settings Read([CanBeNull] string[] args)
 		{
@@ -188,15 +193,17 @@ namespace StakeMaster.BusinessLogic
 			StakeSettings stakeSettings = ReadStakeSettings(args);
 			OtherAddressSettings otherAddressSetings = ReadOtherAddressSettings(args);
 			ConnectionSettings connectionSettings = ReadConnectionSettings(args);
-			return new Settings(stakeSettings, otherAddressSetings, connectionSettings);
+			var settings = new Settings(stakeSettings, otherAddressSetings, connectionSettings);
+			return settings;
 		}
 
 		[NotNull]
 		private static ConnectionSettings ReadConnectionSettings([NotNull] string[] args)
 		{
-			return new ConnectionSettings(ExtractArgumentUriValue(args, "-o=", "--uri="),
+			var settings = new ConnectionSettings(ExtractArgumentUriValue(args, "-o=", "--uri="),
 			                              ExtractArgumentStringValue(args, "-u=", "--user="),
 			                              ExtractArgumentStringValue(args, "-p=", "--password="));
+			return settings;
 		}
 
 		private static void ReadHelpSettings([NotNull] string[] args)
@@ -210,16 +217,18 @@ namespace StakeMaster.BusinessLogic
 		[NotNull]
 		private static OtherAddressSettings ReadOtherAddressSettings([NotNull] string[] args)
 		{
-			return new OtherAddressSettings(ExtractArgumentBoolValue(args, "-i=", "--collectinputs=", true), ExtractArgumentStringArrayValue(args, "-e=", "--excludeaddress="));
+			var settings = new OtherAddressSettings(ExtractArgumentBoolValue(args, "-i=", "--collectinputs=", true), ExtractArgumentStringArrayValue(args, "-e=", "--excludeaddress="));
+			return settings;
 		}
 
 		[NotNull]
 		private static StakeSettings ReadStakeSettings([NotNull] string[] args)
 		{
-			return new StakeSettings(ExtractArgumentBoolValue(args, "-s=", "--stakes=", true),
+			var settings = new StakeSettings(ExtractArgumentBoolValue(args, "-s=", "--stakes=", true),
 			                         ExtractArgumentStringValue(args, "-a=", "--stakeaddress="),
 			                         ExtractArgumentStringValue(args, "-c=", "--collectaddress="),
 			                         ExtractArgumentIntValue(args, "-w=", "--patience=", 7));
+			return settings;
 		}
 	}
 }

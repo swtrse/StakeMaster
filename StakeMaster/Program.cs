@@ -28,15 +28,10 @@ namespace StakeMaster
 			{
 				InitializeAppSettings();
 				InitializeLogging();
+				Log.Verbose("Command line arguments: {@args}", args);
+				Log.Debug("Parse command line arguments...");
 				Settings settings = SettingsHelper.Read(args);
-				Log.Verbose("Trace");
-				Log.Debug("Debug");
-				Log.Information("Info");
-				Task.Delay(10000).Wait();
-				Log.Warning("Warning");
-				Log.Error(new Exception("xxx", new Exception("yyy", new Exception("zzz"))), "Error");
-				Log.Fatal("Critical");
-				Task.Delay(10000).Wait();
+				Log.Verbose("Settings: {@settings}", settings);
 			}
 			catch (SettingsArgumentInvalidException e)
 			{
