@@ -104,5 +104,23 @@ namespace StakeMaster.BusinessLogic.Properties {
                 return ResourceManager.GetString("SettingsHelper_DisplayHelp_Text", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Argument is not defined..
+        /// </summary>
+        internal static string SettingsHelper_ExtractArgument_ArgumentNotDefined_Message {
+            get {
+                return ResourceManager.GetString("SettingsHelper_ExtractArgument_ArgumentNotDefined_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Argument is not unique..
+        /// </summary>
+        internal static string SettingsHelper_ExtractArgument_ArgumentNotUnique_Message {
+            get {
+                return ResourceManager.GetString("SettingsHelper_ExtractArgument_ArgumentNotUnique_Message", resourceCulture);
+            }
+        }
     }
 }

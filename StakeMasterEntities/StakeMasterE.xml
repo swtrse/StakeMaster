@@ -9,7 +9,7 @@
                 Contains settings for the connection to the wallet. This class cannot be inherited.
             </summary>
         </member>
-        <member name="M:StakeMaster.ConnectionSettings.#ctor(System.Uri,System.String,System.Security.SecureString)">
+        <member name="M:StakeMaster.ConnectionSettings.#ctor(System.Uri,System.String,System.String)">
             <summary>
                 Initialzes a new instance of the <see cref="T:StakeMaster.ConnectionSettings" /> class.
             </summary>

@@ -26,7 +26,7 @@ namespace StakeMaster.Entities
 			//Arrange
 			var stake = new StakeSettings(true, "DummyStakeAddress", "DummyCollectingAddress", 7);
 			var address = new OtherAddressSettings(true, null);
-			var connection = new ConnectionSettings(new Uri("http://someuriitis:12345", UriKind.Absolute), "DummyUser", new SecureString());
+			var connection = new ConnectionSettings(new Uri("http://someuriitis:12345", UriKind.Absolute), "DummyUser", "DummyPassword");
 			//Act
 			var result = new Settings(stake, address, connection);
 			//Assert
@@ -44,7 +44,7 @@ namespace StakeMaster.Entities
 			//Arrange
 			var stake = new StakeSettings(true, "DummyStakeAddress", "DummyCollectingAddress", 7);
 			OtherAddressSettings address = null;
-			var connection = new ConnectionSettings(new Uri("http://someuriitis:12345", UriKind.Absolute), "DummyUser", new SecureString());
+			var connection = new ConnectionSettings(new Uri("http://someuriitis:12345", UriKind.Absolute), "DummyUser", "DummyPassword");
 			//Act
 			new Settings(stake, address, connection);
 			//Assert
@@ -76,7 +76,7 @@ namespace StakeMaster.Entities
 			//Arrange
 			StakeSettings stake = null;
 			var address = new OtherAddressSettings(true, null);
-			var connection = new ConnectionSettings(new Uri("http://someuriitis:12345", UriKind.Absolute), "DummyUser", new SecureString());
+			var connection = new ConnectionSettings(new Uri("http://someuriitis:12345", UriKind.Absolute), "DummyUser", "DummyPassword");
 			//Act
 			new Settings(stake, address, connection);
 			//Assert

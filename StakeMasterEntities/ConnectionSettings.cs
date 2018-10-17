@@ -41,7 +41,7 @@ namespace StakeMaster
 		///     <value>null</value>
 		///     .
 		/// </exception>
-		public ConnectionSettings([NotNull] Uri rpcUri, [NotNull] string rpcUser, [NotNull] SecureString rpcPassword)
+		public ConnectionSettings([NotNull] Uri rpcUri, [NotNull] string rpcUser, [NotNull] string rpcPassword)
 		{
 			RpcPassword = rpcPassword ?? throw new ArgumentNullException(nameof(rpcPassword));
 			RpcUri = rpcUri ?? throw new ArgumentNullException(nameof(rpcUri));
@@ -52,7 +52,7 @@ namespace StakeMaster
 		///     Gets the password for the authentication.
 		/// </summary>
 		[NotNull]
-		public SecureString RpcPassword { get; }
+		public string RpcPassword { get; }
 
 		/// <summary>
 		///     Gets the uri for the connection.

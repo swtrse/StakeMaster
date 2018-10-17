@@ -26,13 +26,13 @@ namespace StakeMaster.Entities
 			//Arrange
 			var rpcUri = new Uri("http://someuriitis:12345", UriKind.Absolute);
 			const string rpcUser = "DummyUser";
-			var rpcPassword = new SecureString();
+			const string rpcPassword = "DummyPassword";
 			//Act
 			var result = new ConnectionSettings(rpcUri, rpcUser, rpcPassword);
 			//Assert
 			Assert.AreSame(rpcUri, result.RpcUri);
 			Assert.AreEqual(rpcUser, result.RpcUser);
-			Assert.AreSame(rpcPassword, result.RpcPassword);
+			Assert.AreEqual(rpcPassword, result.RpcPassword);
 		}
 
 		[TestMethod]
@@ -44,7 +44,7 @@ namespace StakeMaster.Entities
 			//Arrange
 			var rpcUri = new Uri("http://someuriitis:12345", UriKind.Absolute);
 			const string rpcUser = "DummyUser";
-			SecureString rpcPassword = null;
+			string rpcPassword = null;
 			//Act
 			new ConnectionSettings(rpcUri, rpcUser, rpcPassword);
 			//Assert
@@ -59,8 +59,8 @@ namespace StakeMaster.Entities
 		{
 			//Arrange
 			Uri rpcUri = null;
-			const string rpcUser = null;
-			var rpcPassword = new SecureString();
+			const string rpcUser = "DummyUser";
+			const string rpcPassword = "DummyPassword";
 			//Act
 			new ConnectionSettings(rpcUri, rpcUser, rpcPassword);
 			//Assert
@@ -76,7 +76,7 @@ namespace StakeMaster.Entities
 			//Arrange
 			var rpcUri = new Uri("http://someuriitis:12345", UriKind.Absolute);
 			const string rpcUser = null;
-			var rpcPassword = new SecureString();
+			const string rpcPassword = "DummyPassword";
 			//Act
 			new ConnectionSettings(rpcUri, rpcUser, rpcPassword);
 			//Assert

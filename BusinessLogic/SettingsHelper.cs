@@ -12,27 +12,178 @@ namespace StakeMaster.BusinessLogic
 {
 	using System;
 	using System.Linq;
-	using System.Runtime.InteropServices;
 	using JetBrains.Annotations;
 	using Properties;
 
 	/// <summary>
-	/// Contains methods for initializing and check settings.
+	///     Contains methods for initializing and check settings.
 	/// </summary>
 	public static class SettingsHelper
 	{
 		/// <summary>
-		/// Returns the settings based on the arguments given.
+		///     Displays the help message for the command line options.
+		/// </summary>
+		/// <param name="message">
+		///     An Additional message to show before the help message.
+		/// </param>
+		public static void DisplayHelp([CanBeNull] string message)
+		{
+			if (!string.IsNullOrEmpty(message))
+			{
+				Console.WriteLine(Resources.SettingsHelper_DisplayHelp_InvalidArgument_Text, message, Environment.NewLine);
+			}
+
+			Console.WriteLine(Resources.SettingsHelper_DisplayHelp_Header);
+			Console.WriteLine(Resources.SettingsHelper_DisplayHelp_Text, Environment.NewLine);
+		}
+
+		private static bool ExtractArgumentBoolValue([NotNull] string[] args, string argumentString, string alternativeArgumentString, bool defaultValue)
+		{
+			try
+			{
+				string arg = args.SingleOrDefault(a => a.StartsWith(argumentString, StringComparison.Ordinal))?.Substring(argumentString.Length);
+				string arg2 = args.SingleOrDefault(a => a.StartsWith(alternativeArgumentString, StringComparison.Ordinal))?.Substring(alternativeArgumentString.Length);
+				if ((arg != null) && (arg2 != null))
+				{
+					throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})",
+					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotUnique_Message);
+				}
+
+				if ((arg == null) && (arg2 == null))
+				{
+					return defaultValue;
+				}
+
+				return arg != null ? bool.Parse(arg) : bool.Parse(arg2);
+			}
+			catch (Exception e)
+			{
+				throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})", e);
+			}
+		}
+
+		private static int ExtractArgumentIntValue([NotNull] string[] args, string argumentString, string alternativeArgumentString, int defaultValue)
+		{
+			try
+			{
+				string arg = args.SingleOrDefault(a => a.StartsWith(argumentString, StringComparison.Ordinal))?.Substring(argumentString.Length);
+				string arg2 = args.SingleOrDefault(a => a.StartsWith(alternativeArgumentString, StringComparison.Ordinal))?.Substring(alternativeArgumentString.Length);
+				if ((arg != null) && (arg2 != null))
+				{
+					throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})",
+					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotUnique_Message);
+				}
+
+				if ((arg == null) && (arg2 == null))
+				{
+					return defaultValue;
+				}
+
+				return arg != null ? int.Parse(arg) : int.Parse(arg2);
+			}
+			catch (Exception e)
+			{
+				throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})", e);
+			}
+		}
+
+		[NotNull]
+		private static string[] ExtractArgumentStringArrayValue([NotNull] string[] args, string argumentString, string alternativeArgumentString)
+		{
+			try
+			{
+				string arg = args.SingleOrDefault(a => a.StartsWith(argumentString, StringComparison.Ordinal))?.Substring(argumentString.Length);
+				string arg2 = args.SingleOrDefault(a => a.StartsWith(alternativeArgumentString, StringComparison.Ordinal))?.Substring(alternativeArgumentString.Length);
+				if ((arg != null) && (arg2 != null))
+				{
+					throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})",
+					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotUnique_Message);
+				}
+
+				if ((arg == null) && (arg2 == null))
+				{
+					return new string[0];
+				}
+
+				return (arg ?? arg2).Split(',');
+			}
+			catch (Exception e)
+			{
+				throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})", e);
+			}
+		}
+
+		[NotNull]
+		private static string ExtractArgumentStringValue([NotNull] string[] args, string argumentString, string alternativeArgumentString)
+		{
+			try
+			{
+				string arg = args.SingleOrDefault(a => a.StartsWith(argumentString, StringComparison.Ordinal))?.Substring(argumentString.Length);
+				string arg2 = args.SingleOrDefault(a => a.StartsWith(alternativeArgumentString, StringComparison.Ordinal))?.Substring(alternativeArgumentString.Length);
+				if ((arg != null) && (arg2 != null))
+				{
+					throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})",
+					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotUnique_Message);
+				}
+
+				if ((arg == null) && (arg2 == null))
+				{
+					throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})",
+					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotDefined_Message);
+				}
+
+				return arg ?? arg2;
+			}
+			catch (Exception e)
+			{
+				throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})", e);
+			}
+		}
+
+		[NotNull]
+		private static Uri ExtractArgumentUriValue([NotNull] string[] args, string argumentString, string alternativeArgumentString)
+		{
+			try
+			{
+				string arg = args.SingleOrDefault(a => a.StartsWith(argumentString, StringComparison.Ordinal))?.Substring(argumentString.Length);
+				string arg2 = args.SingleOrDefault(a => a.StartsWith(alternativeArgumentString, StringComparison.Ordinal))?.Substring(alternativeArgumentString.Length);
+				if ((arg != null) && (arg2 != null))
+				{
+					throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})",
+					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotUnique_Message);
+				}
+
+				if ((arg == null) && (arg2 == null))
+				{
+					throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})",
+					                                           Resources.SettingsHelper_ExtractArgument_ArgumentNotDefined_Message);
+				}
+
+				return new Uri(arg ?? arg2, UriKind.Absolute);
+			}
+			catch (Exception e)
+			{
+				throw new SettingsArgumentInvalidException($"({argumentString}|{alternativeArgumentString})", e);
+			}
+		}
+
+		/// <summary>
+		///     Returns the settings based on the arguments given.
 		/// </summary>
 		/// <param name="args">
-		/// Arguments that are considered when generating the settings.
+		///     Arguments that are considered when generating the settings.
 		/// </param>
 		/// <returns>
-		/// Returns a <see cref="Settings"/>-object with all properties set based on the given arguments.
+		///     Returns a <see cref="Settings" />-object with all properties set based on the given arguments.
 		/// </returns>
 		[NotNull]
-		public static Settings Read(string[] args)
+		public static Settings Read([CanBeNull] string[] args)
 		{
+			if (args == null)
+			{
+				args = new string[0];
+			}
+
 			ReadHelpSettings(args);
 			StakeSettings stakeSettings = ReadStakeSettings(args);
 			OtherAddressSettings otherAddressSetings = ReadOtherAddressSettings(args);
@@ -40,22 +191,15 @@ namespace StakeMaster.BusinessLogic
 			return new Settings(stakeSettings, otherAddressSetings, connectionSettings);
 		}
 
-		private static ConnectionSettings ReadConnectionSettings(string[] args)
+		[NotNull]
+		private static ConnectionSettings ReadConnectionSettings([NotNull] string[] args)
 		{
-			throw new NotImplementedException();
+			return new ConnectionSettings(ExtractArgumentUriValue(args, "-o=", "--uri="),
+			                              ExtractArgumentStringValue(args, "-u=", "--user="),
+			                              ExtractArgumentStringValue(args, "-p=", "--password="));
 		}
 
-		private static OtherAddressSettings ReadOtherAddressSettings(string[] args)
-		{
-			throw new NotImplementedException();
-		}
-
-		private static StakeSettings ReadStakeSettings(string[] args)
-		{
-			throw new NotImplementedException();
-		}
-
-		private static void ReadHelpSettings(string[] args)
+		private static void ReadHelpSettings([NotNull] string[] args)
 		{
 			if (args.Contains("-?") || args.Contains("--help"))
 			{
@@ -63,15 +207,19 @@ namespace StakeMaster.BusinessLogic
 			}
 		}
 
-		public static void DisplayHelp(string message)
+		[NotNull]
+		private static OtherAddressSettings ReadOtherAddressSettings([NotNull] string[] args)
 		{
-			if (!string.IsNullOrEmpty(message))
-			{
-				Console.WriteLine(Resources.SettingsHelper_DisplayHelp_InvalidArgument_Text, message, Environment.NewLine);
-			}
-			Console.WriteLine(Resources.SettingsHelper_DisplayHelp_Header);
-			Console.WriteLine(Resources.SettingsHelper_DisplayHelp_Text, Environment.NewLine);
-			//Console.WriteLine("General settings{0}-? or --help: Displays this help{0}{0}Settings regarding the stake function{0}-s=<true/false> or --stakes=<true/false>:   Enables or disables modifications of inputs at the stake address. Default: true{0}-a=<address> or --stakeaddress=<addres>:    Sets the dedicated stake address. Mandatory.{0}-c=<address> or --collectaddress=<address>: Sets the dedocated collect address. Mandatory.{0}{0}Settings regarding all other addresses in the wallet{0}-i=<true/false> or --collectinputs=<true/false>                : Moves all inputs from other addresses to the collect address. Default: true{0}-e=<adr_1>{{,<adr_n>}} or --excludeaddress==<adr_1>{{,<adr_n>}}: Comma seperated list of addresses that will be excluded.{0}Settings regarding the rpc connection to the wallet{0}-u=<user> or --user=<user>:             The user for the rpc connection. Mandatory.{0}-p=<password> or --password=<password>: The password for the rpc connection. Mandatory.{0}-o or --uri=<uri>:                      The uri for the rpc connection. Mandatory.{0}", Environment.NewLine);
+			return new OtherAddressSettings(ExtractArgumentBoolValue(args, "-i=", "--collectinputs=", true), ExtractArgumentStringArrayValue(args, "-e=", "--excludeaddress="));
+		}
+
+		[NotNull]
+		private static StakeSettings ReadStakeSettings([NotNull] string[] args)
+		{
+			return new StakeSettings(ExtractArgumentBoolValue(args, "-s=", "--stakes=", true),
+			                         ExtractArgumentStringValue(args, "-a=", "--stakeaddress="),
+			                         ExtractArgumentStringValue(args, "-c=", "--collectaddress="),
+			                         ExtractArgumentIntValue(args, "-w=", "--patience=", 7));
 		}
 	}
 }

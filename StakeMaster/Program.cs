@@ -20,7 +20,7 @@ namespace StakeMaster
 
 	internal class Program
 	{
-		public static IConfiguration Configuration { get; } = InitializeAppSettings();
+		private static IConfiguration Configuration { get; } = InitializeAppSettings();
 
 		private static void Main(string[] args)
 		{
@@ -40,6 +40,7 @@ namespace StakeMaster
 			}
 			catch (SettingsArgumentInvalidException e)
 			{
+				Log.Verbose(e, "Error while reading the command line arguments.");
 				SettingsHelper.DisplayHelp(e.Message);
 			}
 			catch (Exception e)
