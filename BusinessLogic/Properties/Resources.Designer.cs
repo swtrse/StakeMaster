@@ -61,6 +61,51 @@ namespace StakeMaster.BusinessLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zero fee transaction size limit:.
+        /// </summary>
+        internal static string FreeTransactionNotPossibleException_Free_Name {
+            get {
+                return ResourceManager.GetString("FreeTransactionNotPossibleException_Free_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A free Transaction is not possible with the given values..
+        /// </summary>
+        internal static string FreeTransactionNotPossibleException_Generic {
+            get {
+                return ResourceManager.GetString("FreeTransactionNotPossibleException_Generic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inputs:.
+        /// </summary>
+        internal static string FreeTransactionNotPossibleException_InputCount_Name {
+            get {
+                return ResourceManager.GetString("FreeTransactionNotPossibleException_InputCount_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outputs:.
+        /// </summary>
+        internal static string FreeTransactionNotPossibleException_OutputCount_Name {
+            get {
+                return ResourceManager.GetString("FreeTransactionNotPossibleException_OutputCount_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculated transaction size:.
+        /// </summary>
+        internal static string FreeTransactionNotPossibleException_Size_Name {
+            get {
+                return ResourceManager.GetString("FreeTransactionNotPossibleException_Size_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Argument:.
         /// </summary>
         internal static string SettingsArgumentInvalidException_Argument_Name {

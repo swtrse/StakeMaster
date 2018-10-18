@@ -100,7 +100,7 @@ namespace StakeMaster.BusinessLogic
 		/// <summary>
 		///     Holds the argument that causes the exception.
 		/// </summary>
-		public string Argument { get; set; }
+		public string Argument { get; }
 
 		/// <inheritdoc />
 		public override string Message

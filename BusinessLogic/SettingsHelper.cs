@@ -18,6 +18,7 @@ namespace StakeMaster.BusinessLogic
 	/// <summary>
 	///     Contains methods for initializing and check settings.
 	/// </summary>
+	[PublicAPI]
 	public static class SettingsHelper
 	{
 		/// <summary>

@@ -138,4 +138,19 @@
   <data name="SettingsHelper_ExtractArgument_ArgumentNotDefined_Message" xml:space="preserve">
     <value>Argument is not defined.</value>
   </data>
+  <data name="FreeTransactionNotPossibleException_Free_Name" xml:space="preserve">
+    <value>Zero fee transaction size limit:</value>
+  </data>
+  <data name="FreeTransactionNotPossibleException_Generic" xml:space="preserve">
+    <value>A free Transaction is not possible with the given values.</value>
+  </data>
+  <data name="FreeTransactionNotPossibleException_InputCount_Name" xml:space="preserve">
+    <value>Inputs:</value>
+  </data>
+  <data name="FreeTransactionNotPossibleException_OutputCount_Name" xml:space="preserve">
+    <value>Outputs:</value>
+  </data>
+  <data name="FreeTransactionNotPossibleException_Size_Name" xml:space="preserve">
+    <value>Calculated transaction size:</value>
+  </data>
 </root>
