@@ -8,6 +8,29 @@
             <summary>Represents errors that occur when no zero fee transaction is possible.</summary>
             <inheritdoc />
         </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.CalculatedTransactionSize">
+            <summary>
+                Gets the calculated size of the transaction.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.FreeTransactionByteLimit">
+            <summary>
+                Gets the actual size limit for zero fee transactions.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.InputCount">
+            <summary>
+                Gets the number of inputs for the transaction.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.Message">
+            <inheritdoc />
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.OutputCount">
+            <summary>
+                Gets the number of outputs for the transaction.
+            </summary>
+        </member>
         <member name="M:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
                 Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException" /> class.
@@ -35,29 +58,6 @@
         </member>
         <member name="M:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <inheritdoc />
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.CalculatedTransactionSize">
-            <summary>
-                Gets the calculated size of the transaction.
-            </summary>
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.FreeTransactionByteLimit">
-            <summary>
-                Gets the actual size limit for zero fee transactions.
-            </summary>
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.InputCount">
-            <summary>
-                Gets the number of inputs for the transaction.
-            </summary>
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.Message">
-            <inheritdoc />
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.OutputCount">
-            <summary>
-                Gets the number of outputs for the transaction.
-            </summary>
         </member>
         <member name="M:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <inheritdoc />

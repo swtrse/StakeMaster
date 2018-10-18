@@ -65,7 +65,7 @@ namespace StakeMaster.BusinessLogic
 			}
 
 			var count = 1;
-			while (FreeTransactionByteLimit < GetTransactionSize(count + 1, numberOfOutputs))
+			while (GetTransactionSize(count + 1, numberOfOutputs) <= FreeTransactionByteLimit)
 			{
 				++count;
 			}
@@ -91,7 +91,7 @@ namespace StakeMaster.BusinessLogic
 			}
 
 			var count = 1;
-			while (FreeTransactionByteLimit < GetTransactionSize(numberOfInputs, count + 1))
+			while (GetTransactionSize(numberOfInputs, count + 1) <= FreeTransactionByteLimit)
 			{
 				++count;
 			}
@@ -111,6 +111,6 @@ namespace StakeMaster.BusinessLogic
 		/// <returns>
 		///     The calculated transaction size;
 		/// </returns>
-		public int GetTransactionSize(int numberOfInputs, int numberOfOutputs) => numberOfInputs * InputSize + numberOfOutputs + OutputSize + TransactionOverhead;
+		public int GetTransactionSize(int numberOfInputs, int numberOfOutputs) => (numberOfInputs * InputSize) + (numberOfOutputs * OutputSize) + TransactionOverhead;
 	}
 }
