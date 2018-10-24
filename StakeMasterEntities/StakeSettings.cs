@@ -29,6 +29,7 @@ namespace StakeMaster
 		///     processed.
 		/// </param>
 		/// <param name="stakingPatience">The number of days where an input should stake at least once.</param>
+		/// <param name="walletPassword">The password of the wallet.</param>
 		/// <exception cref="ArgumentNullException">
 		///     <paramref name="dedicatedStakingAddress" /> is
 		///     <value>null</value>
@@ -39,12 +40,13 @@ namespace StakeMaster
 		///     <value>null</value>
 		///     .
 		/// </exception>
-		public StakeSettings(bool editStakes, [NotNull] string dedicatedStakingAddress, [NotNull] string dedicatedCollectingAddress, int stakingPatience)
+		public StakeSettings(bool editStakes, [NotNull] string dedicatedStakingAddress, [NotNull] string dedicatedCollectingAddress, int stakingPatience, [NotNull] string walletPassword)
 		{
 			DedicatedStakingAddress = dedicatedStakingAddress ?? throw new ArgumentNullException(nameof(dedicatedStakingAddress));
 			DedicatedCollectingAddress = dedicatedCollectingAddress ?? throw new ArgumentNullException(nameof(dedicatedCollectingAddress));
 			StakingPatience = stakingPatience;
 			EditStakes = editStakes;
+			WalletPassword = walletPassword ?? throw new ArgumentNullException(nameof(walletPassword));
 		}
 
 		/// <summary>
@@ -58,6 +60,12 @@ namespace StakeMaster
 		/// </summary>
 		[NotNull]
 		public string DedicatedStakingAddress { get; }
+
+		/// <summary>
+		///     Gets the password of the wallet.
+		/// </summary>
+		[NotNull]
+		public string WalletPassword { get; }
 
 		/// <summary>
 		///     If

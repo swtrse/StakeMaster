@@ -27,13 +27,15 @@ namespace StakeMaster.Entities
 			const string dedicatedCollectionAddres = "DummyCollectingAddress";
 			const int stakingPatience = 7;
 			const bool editStakes = true;
+			const string walletPassword = "DummyPassword";
 			//Act
-			var result = new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience);
+			var result = new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience, walletPassword);
 			//Assert
 			Assert.AreEqual(dedicatedStakingAddress, result.DedicatedStakingAddress);
 			Assert.AreSame(dedicatedCollectionAddres, result.DedicatedCollectingAddress);
 			Assert.AreEqual(stakingPatience, result.StakingPatience);
 			Assert.AreEqual(editStakes, result.EditStakes);
+			Assert.AreEqual(walletPassword, result.WalletPassword);
 		}
 
 		[TestMethod]
@@ -47,8 +49,9 @@ namespace StakeMaster.Entities
 			const string dedicatedCollectionAddres = null;
 			const int stakingPatience = 7;
 			const bool editStakes = true;
+			const string walletPassword = "DummyPassword";
 			//Act
-			new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience);
+			new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience, walletPassword);
 			//Assert
 			//Will be handled through ExpectedException.
 		}
@@ -64,8 +67,27 @@ namespace StakeMaster.Entities
 			const string dedicatedCollectionAddres = "DummyCollectingAddress";
 			const int stakingPatience = 7;
 			const bool editStakes = true;
+			const string walletPassword = "DummyPassword";
 			//Act
-			new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience);
+			new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience, walletPassword);
+			//Assert
+			//Will be handled through ExpectedException.
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentNullException))]
+		[SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
+		[SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
+		public void Constructor_ParameterWalletPasswordIsNull()
+		{
+			//Arrange
+			const string dedicatedStakingAddress = "DummyStakeAddress";
+			const string dedicatedCollectionAddres = "DummyCollectingAddress";
+			const int stakingPatience = 7;
+			const bool editStakes = true;
+			const string walletPassword = null;
+			//Act
+			new StakeSettings(editStakes, dedicatedStakingAddress, dedicatedCollectionAddres, stakingPatience, walletPassword);
 			//Assert
 			//Will be handled through ExpectedException.
 		}

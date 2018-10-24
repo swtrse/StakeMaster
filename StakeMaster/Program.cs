@@ -12,9 +12,8 @@ namespace StakeMaster
 {
 	using System;
 	using System.IO;
-	using System.Reflection;
-	using System.Threading.Tasks;
 	using BusinessLogic;
+	using JetBrains.Annotations;
 	using Microsoft.Extensions.Configuration;
 	using Serilog;
 
@@ -22,21 +21,47 @@ namespace StakeMaster
 	{
 		private static IConfiguration Configuration { get; } = InitializeAppSettings();
 
+		[NotNull]
+		private static TransactionHelper GetConfiguration()
+		{
+			IConfigurationSection section = Configuration.GetSection("TransactionSettings");
+			return new TransactionHelper(section.GetValue<int>("InputSize"),
+			                             section.GetValue<int>("OutputSize"),
+			                             section.GetValue<int>("Overhead"),
+			                             section.GetValue<int>("FreeTransactionSizeLimit"),
+			                             section.GetValue<DateTime>("BaseDateOfTransactions").Date,
+			                             section.GetValue<int>("RpcTimeoutInSeconds"));
+		}
+
+		private static IConfiguration InitializeAppSettings()
+		{
+			IConfigurationBuilder builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", false, false);
+
+			return builder.Build();
+		}
+
+		private static void InitializeLogging()
+		{
+			Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(Configuration).CreateLogger();
+		}
+
 		private static void Main(string[] args)
 		{
 			try
 			{
 				InitializeAppSettings();
 				InitializeLogging();
+				Log.Information("StakeMaster started");
 				Log.Verbose("Command line arguments: {@args}", args);
 				Log.Debug("Parse command line arguments...");
 				Settings settings = SettingsHelper.Read(args);
-				//TODO: Calculate Transaction Size
-				//TODO: Move Inputs to Collection Address
-				//TODO: Move Dust from Staking Address
-				//TODO: Compress Collect Address
-				//TODO: Generate new Staking Input
 				Log.Verbose("Settings: {@settings}", settings);
+				TransactionHelper transactionHelper = GetConfiguration();
+				Log.Verbose("TransactionHelper: {@transactionHelper}", transactionHelper);
+				var wallet = new ProcessWallet(settings, transactionHelper);
+				wallet.Run();
+
+				Log.Information("StakeMaster finished.");
 			}
 			catch (SettingsArgumentInvalidException e)
 			{
@@ -51,20 +76,6 @@ namespace StakeMaster
 			{
 				Log.CloseAndFlush();
 			}
-		}
-
-		private static IConfiguration InitializeAppSettings()
-		{
-			IConfigurationBuilder builder = new ConfigurationBuilder()
-				.SetBasePath(Directory.GetCurrentDirectory())
-				.AddJsonFile("appsettings.json", false, false);
-
-			return builder.Build();
-		}
-
-		private static void InitializeLogging()
-		{
-			Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(Configuration).CreateLogger();
 		}
 	}
 }

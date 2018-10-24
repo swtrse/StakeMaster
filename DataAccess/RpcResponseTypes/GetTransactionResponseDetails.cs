@@ -1,5 +1,5 @@
 ﻿// ******************************* Module Header *******************************
-// Module Name: AccessSettingFile.cs
+// Module Name: GetTransactionResponseDetails.cs
 // Project:     StakeMasterDataAccess
 // Copyright (c) Michael Goldfinger.
 // 
@@ -8,10 +8,16 @@
 // WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 // *****************************************************************************
 
-namespace StakeMaster.DataAccess
+namespace StakeMaster.DataAccess.RpcResponseTypes
 {
-	/// <summary>
-	///     Contains methods for file and wallet read and write operations.
-	/// </summary>
-	public class AccessSettingFile { }
+	public class GetTransactionResponseDetails
+	{
+		public string Account { get; set; }
+		public string Address { get; set; }
+		public decimal Amount { get; set; }
+		public string Category { get; set; }
+		public decimal Fee { get; set; }
+		public string Label { get; set; }
+		public int Vout { get; set; }
+	}
 }

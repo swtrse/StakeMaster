@@ -142,7 +142,7 @@ namespace StakeMaster.BusinessLogic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to General settings{0}-? or --help: Displays this help{0}{0}Settings regarding the stake function{0}-s=&lt;true/false&gt; or --stakes=&lt;true/false&gt;  : Enables or disables modifications of inputs at the stake address. Default: true{0}-a=&lt;address&gt; or --stakeaddress=&lt;addres&gt;   : Sets the dedicated stake address. Mandatory.{0}-c=&lt;address&gt; or --collectaddress=&lt;address&gt;: Sets the dedicated collect address. Mandatory.{0}-w=&lt;days&gt; or --patience=&lt;days&gt;            : Sets the number of days when a input should stake at least on [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to General settings{0}-? or --help: Displays this help{0}{0}Settings regarding the stake function{0}-s=&lt;true/false&gt; or --stakes=&lt;true/false&gt;    : Enables or disables modifications of inputs at the stake address. Default: true{0}-a=&lt;address&gt; or --stakeaddress=&lt;addres&gt;     : Sets the dedicated stake address. Mandatory.{0}-c=&lt;address&gt; or --collectaddress=&lt;address&gt;  : Sets the dedicated collect address. Mandatory.{0}-w=&lt;days&gt; or --patience=&lt;days&gt;              : Sets the number of days when a input should stake at  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SettingsHelper_DisplayHelp_Text {
             get {

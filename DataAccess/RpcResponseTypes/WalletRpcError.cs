@@ -1,5 +1,5 @@
 ﻿// ******************************* Module Header *******************************
-// Module Name: AccessSettingFile.cs
+// Module Name: WalletRpcError.cs
 // Project:     StakeMasterDataAccess
 // Copyright (c) Michael Goldfinger.
 // 
@@ -8,10 +8,16 @@
 // WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 // *****************************************************************************
 
-namespace StakeMaster.DataAccess
+namespace StakeMaster.DataAccess.RpcResponseTypes
 {
-	/// <summary>
-	///     Contains methods for file and wallet read and write operations.
-	/// </summary>
-	public class AccessSettingFile { }
+	using Newtonsoft.Json;
+
+	internal sealed class WalletRpcError
+	{
+		[JsonProperty(PropertyName = "code")]
+		public int Code { get; set; }
+
+		[JsonProperty(PropertyName = "message")]
+		public string Message { get; set; }
+	}
 }

@@ -6,8 +6,14 @@
     <members>
         <member name="T:StakeMaster.DataAccess.AccessSettingFile">
             <summary>
-            Contains methods for file and wallet read and write operations.
+                Contains methods for file and wallet read and write operations.
             </summary>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.#ctor(StakeMaster.ConnectionSettings,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.DataAccess.RpcResponseTypes.WalletRpcRequest.#ctor(System.Int32,System.String,System.Object[])">
+            <inheritdoc />
         </member>
     </members>
 </doc>

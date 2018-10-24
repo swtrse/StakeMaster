@@ -131,7 +131,7 @@
                 Contains settings for the staking. This class cannot be inherited.
             </summary>
         </member>
-        <member name="M:StakeMaster.StakeSettings.#ctor(System.Boolean,System.String,System.String,System.Int32)">
+        <member name="M:StakeMaster.StakeSettings.#ctor(System.Boolean,System.String,System.String,System.Int32,System.String)">
             <summary>
                 Initialzes a new instance of the <see cref="T:StakeMaster.StakeSettings" /> class.
             </summary>
@@ -142,6 +142,7 @@
                 processed.
             </param>
             <param name="stakingPatience">The number of days where an input should stake at least once.</param>
+            <param name="walletPassword">The password of the wallet.</param>
             <exception cref="T:System.ArgumentNullException">
                 <paramref name="dedicatedStakingAddress" /> is
                 <value>null</value>
@@ -161,6 +162,11 @@
         <member name="P:StakeMaster.StakeSettings.DedicatedStakingAddress">
             <summary>
                 Gets the public address where all inputs fore staking are located.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.StakeSettings.WalletPassword">
+            <summary>
+                Gets the password of the wallet.
             </summary>
         </member>
         <member name="P:StakeMaster.StakeSettings.EditStakes">

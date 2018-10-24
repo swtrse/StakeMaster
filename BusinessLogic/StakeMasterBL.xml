@@ -62,6 +62,9 @@
         <member name="M:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <inheritdoc />
         </member>
+        <member name="M:StakeMaster.BusinessLogic.ProcessWallet.#ctor(StakeMaster.Settings,StakeMaster.BusinessLogic.TransactionHelper)">
+            <inheritdoc />
+        </member>
         <member name="T:StakeMaster.BusinessLogic.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -125,7 +128,7 @@
         </member>
         <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsHelper_DisplayHelp_Text">
             <summary>
-              Looks up a localized string similar to General settings{0}-? or --help: Displays this help{0}{0}Settings regarding the stake function{0}-s=&lt;true/false&gt; or --stakes=&lt;true/false&gt;  : Enables or disables modifications of inputs at the stake address. Default: true{0}-a=&lt;address&gt; or --stakeaddress=&lt;addres&gt;   : Sets the dedicated stake address. Mandatory.{0}-c=&lt;address&gt; or --collectaddress=&lt;address&gt;: Sets the dedicated collect address. Mandatory.{0}-w=&lt;days&gt; or --patience=&lt;days&gt;            : Sets the number of days when a input should stake at least on [rest of string was truncated]&quot;;.
+              Looks up a localized string similar to General settings{0}-? or --help: Displays this help{0}{0}Settings regarding the stake function{0}-s=&lt;true/false&gt; or --stakes=&lt;true/false&gt;    : Enables or disables modifications of inputs at the stake address. Default: true{0}-a=&lt;address&gt; or --stakeaddress=&lt;addres&gt;     : Sets the dedicated stake address. Mandatory.{0}-c=&lt;address&gt; or --collectaddress=&lt;address&gt;  : Sets the dedicated collect address. Mandatory.{0}-w=&lt;days&gt; or --patience=&lt;days&gt;              : Sets the number of days when a input should stake at  [rest of string was truncated]&quot;;.
             </summary>
         </member>
         <member name="P:StakeMaster.BusinessLogic.Properties.Resources.SettingsHelper_ExtractArgument_ArgumentNotDefined_Message">
@@ -243,8 +246,18 @@
                 Contains methods for handling transaction sizes.
             </summary>
         </member>
-        <member name="M:StakeMaster.BusinessLogic.TransactionHelper.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:StakeMaster.BusinessLogic.TransactionHelper.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.DateTime,System.Int32)">
             <inheritdoc />
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.TransactionHelper.BaseDate">
+            <summary>
+            Date where Blocktime is based on.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.TransactionHelper.ConnectionTimeout">
+            <summary>
+            Timeout for the Rpc Connection in seconds.
+            </summary>
         </member>
         <member name="P:StakeMaster.BusinessLogic.TransactionHelper.FreeTransactionByteLimit">
             <summary>

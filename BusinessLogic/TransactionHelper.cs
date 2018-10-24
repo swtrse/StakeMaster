@@ -10,6 +10,7 @@
 
 namespace StakeMaster.BusinessLogic
 {
+	using System;
 	using JetBrains.Annotations;
 
 	/// <summary>
@@ -19,13 +20,25 @@ namespace StakeMaster.BusinessLogic
 	public sealed class TransactionHelper
 	{
 		/// <inheritdoc />
-		public TransactionHelper(int inputSize, int outputSize, int transactionOverhead, int freeTransactionByteLimit)
+		public TransactionHelper(int inputSize, int outputSize, int transactionOverhead, int freeTransactionByteLimit, DateTime baseDate, int connectionTimeout)
 		{
 			InputSize = inputSize;
 			OutputSize = outputSize;
 			TransactionOverhead = transactionOverhead;
 			FreeTransactionByteLimit = freeTransactionByteLimit;
+			BaseDate = baseDate;
+			ConnectionTimeout = connectionTimeout;
 		}
+
+		/// <summary>
+		/// Date where Blocktime is based on.
+		/// </summary>
+		public DateTime BaseDate { get; }
+
+		/// <summary>
+		/// Timeout for the Rpc Connection in seconds.
+		/// </summary>
+		public int ConnectionTimeout { get; }
 
 		/// <summary>
 		///     Gets the allowed size for zero fee transactions.

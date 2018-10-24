@@ -226,7 +226,8 @@ namespace StakeMaster.BusinessLogic
 			return new StakeSettings(ExtractArgumentBoolValue(args, "-s=", "--stakes=", true),
 			                         ExtractArgumentStringValue(args, "-a=", "--stakeaddress="),
 			                         ExtractArgumentStringValue(args, "-c=", "--collectaddress="),
-			                         ExtractArgumentIntValue(args, "-w=", "--patience=", 7));
+			                         ExtractArgumentIntValue(args, "-w=", "--patience=", 7),
+			                         ExtractArgumentStringValue(args, "-q=", "--walletpassword="));
 		}
 	}
 }
