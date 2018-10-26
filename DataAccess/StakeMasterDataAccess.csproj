@@ -6,6 +6,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>StakeMasterCertificate.pfx</AssemblyOriginatorKeyFile>
     <AssemblyName>StakeMasterDA</AssemblyName>
+    <Version>1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
