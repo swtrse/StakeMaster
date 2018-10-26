@@ -15,13 +15,24 @@ namespace StakeMaster.BusinessLogic
 	using System.Linq;
 	using System.Threading.Tasks;
 	using DataAccess;
-	using DataAccess.RpcResponseTypes;
 	using JetBrains.Annotations;
 	using Rpc;
 	using Serilog;
 
+	/// <summary>
+	///     Contains the core logic for the StakeMaster features.
+	/// </summary>
 	public sealed class ProcessWallet
 	{
+		/// <summary>
+		///     Initializes a new instance of the <see cref="ProcessWallet" /> class.
+		/// </summary>
+		/// <param name="settings">
+		///     The settings for the current run.
+		/// </param>
+		/// <param name="transactionHelper">
+		///     The transaction settings for the current run.
+		/// </param>
 		/// <inheritdoc />
 		public ProcessWallet([NotNull] Settings settings, TransactionHelper transactionHelper)
 		{
@@ -57,6 +68,7 @@ namespace StakeMaster.BusinessLogic
 			{
 				newStakeSplitThreshold = Math.Max(oldestInputs.Max(i => i.Amount), stakeSplitThreshold);
 			}
+
 			Log.Verbose("Returnvalue of ProcessWallet.CheckForHigherThreshold(decimal stakeSplitThreshold): {newStakeSplitThreshold}.", newStakeSplitThreshold);
 			return newStakeSplitThreshold;
 		}
@@ -81,6 +93,7 @@ namespace StakeMaster.BusinessLogic
 			{
 				newStakeSplitThreshold = oldestInput.Amount > stakeSplitThreshold ? Math.Ceiling(oldestInput.Amount / 2) : Math.Ceiling(oldestInput.Amount);
 			}
+
 			decimal ret = Math.Min(stakeSplitThreshold, newStakeSplitThreshold);
 			Log.Verbose("Returnvalue of ProcessWallet.CheckForLowerThreshold(decimal stakeSplitThreshold): {ret}.", ret);
 			return ret;
@@ -301,6 +314,7 @@ namespace StakeMaster.BusinessLogic
 					finished = true;
 				}
 			}
+
 			List<string> ret = transactionList.Where(t => !string.IsNullOrWhiteSpace(t)).ToList();
 			Log.Verbose("Returnvalue of ProcessWallet.ProcessInputs(List<string> addresses, int minimunNeededInputs): {@ret}.", ret);
 			return ret;
@@ -316,6 +330,9 @@ namespace StakeMaster.BusinessLogic
 		//sendrawtransaction
 		//, setstakesplitthreshold
 
+		/// <summary>
+		///     Process all operations on the wallet based on the current settings.
+		/// </summary>
 		public void Run()
 		{
 			Log.Debug("Call of method: void ProcessWallet.Run().");
@@ -360,6 +377,7 @@ namespace StakeMaster.BusinessLogic
 				Task.Delay(TimeSpan.FromSeconds(10)).Wait();
 				waitingList = waitingList.Where(t => AccessWallet.GetTransaction(t).Confirmations == 0).ToList();
 			}
+
 			Log.Information("All transactions complete.");
 		}
 	}

@@ -83,6 +83,9 @@
                 are automaicaly excluded from the move and must not be spezified explicitly.
             </remarks>
         </member>
+        <member name="M:StakeMaster.Rpc.WalletRpcRequest.#ctor(System.Int32,System.String,System.Object[])">
+            <inheritdoc />
+        </member>
         <member name="T:StakeMaster.Settings">
             <summary>
                 Contains all settings for the maintanace of a staking masternode coin.
@@ -164,11 +167,6 @@
                 Gets the public address where all inputs fore staking are located.
             </summary>
         </member>
-        <member name="P:StakeMaster.StakeSettings.WalletPassword">
-            <summary>
-                Gets the password of the wallet.
-            </summary>
-        </member>
         <member name="P:StakeMaster.StakeSettings.EditStakes">
             <summary>
                 If
@@ -183,6 +181,11 @@
         <member name="P:StakeMaster.StakeSettings.StakingPatience">
             <summary>
                 Gets the number of days during an input should at least stake one time.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.StakeSettings.WalletPassword">
+            <summary>
+                Gets the password of the wallet.
             </summary>
         </member>
     </members>

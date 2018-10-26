@@ -11,7 +11,6 @@
 namespace StakeMaster
 {
 	using System;
-	using System.Security;
 	using JetBrains.Annotations;
 
 	/// <summary>

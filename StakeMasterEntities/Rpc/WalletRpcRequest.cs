@@ -1,6 +1,6 @@
 ﻿// ******************************* Module Header *******************************
 // Module Name: WalletRpcRequest.cs
-// Project:     StakeMasterDataAccess
+// Project:     StakeMasterEntities
 // Copyright (c) Michael Goldfinger.
 // 
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
@@ -8,7 +8,7 @@
 // WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 // *****************************************************************************
 
-namespace StakeMaster.DataAccess.RpcResponseTypes
+namespace StakeMaster.Rpc
 {
 	using System.Collections.Generic;
 	using System.Linq;
@@ -16,7 +16,7 @@ namespace StakeMaster.DataAccess.RpcResponseTypes
 	using JetBrains.Annotations;
 	using Newtonsoft.Json;
 
-	internal sealed class WalletRpcRequest
+	public sealed class WalletRpcRequest
 	{
 		/// <inheritdoc />
 		public WalletRpcRequest(int id, string method, [CanBeNull] params object[] parameters)

@@ -84,7 +84,7 @@ namespace StakeMasterBussinessLogic.Test
 		         {
 			         "--stakeaddress=adr1",
 			         "--collectaddress=adr2",
-					 "--walletpassword=pass2",
+			         "--walletpassword=pass2",
 			         "--user=user",
 			         "--password=pass",
 			         "--uri=localhost:1234",
@@ -108,7 +108,7 @@ namespace StakeMasterBussinessLogic.Test
 			         "--stakeaddress=adr1",
 			         "--collectaddress=adr2",
 			         "--walletpassword=pass2",
-					 "--user=user",
+			         "--user=user",
 			         "--password=pass",
 			         "--uri=localhost:1234",
 			         "--stakes=false",
@@ -129,7 +129,7 @@ namespace StakeMasterBussinessLogic.Test
 		public void Read_AllArgumentsPresent(string[] args,
 		                                     string stakeAddress,
 		                                     string collectAddress,
-											 string walletPassword,
+		                                     string walletPassword,
 		                                     string user,
 		                                     string password,
 		                                     string uri,
@@ -154,16 +154,18 @@ namespace StakeMasterBussinessLogic.Test
 			{
 				Assert.IsTrue(result.Address.ExcludeAddresses.Contains(adr));
 			}
+
 			Assert.AreEqual(user, result.Connection.RpcUser);
 			Assert.AreEqual(password, result.Connection.RpcPassword);
 			Assert.AreEqual(expectedUri, result.Connection.RpcUri);
 		}
 
 		[DataTestMethod]
-		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234"}, "adr1", "adr2", "pass2","user", "pass", "localhost:1234")]
-		[DataRow(new[] {"--stakeaddress=adr1", "--collectaddress=adr2", "--walletpassword=pass2","--user=user", "--password=pass", "--uri=localhost:1234"},
+		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234"}, "adr1", "adr2", "pass2", "user", "pass", "localhost:1234")]
+		[DataRow(new[] {"--stakeaddress=adr1", "--collectaddress=adr2", "--walletpassword=pass2", "--user=user", "--password=pass", "--uri=localhost:1234"},
 			"adr1",
-			"adr2","pass2",
+			"adr2",
+			"pass2",
 			"user",
 			"pass",
 			"localhost:1234")]
@@ -186,6 +188,7 @@ namespace StakeMasterBussinessLogic.Test
 			{
 				Assert.IsTrue(result.Address.ExcludeAddresses.Contains(adr));
 			}
+
 			Assert.AreEqual(user, result.Connection.RpcUser);
 			Assert.AreEqual(password, result.Connection.RpcPassword);
 			Assert.AreEqual(expectedUri, result.Connection.RpcUri);
@@ -222,6 +225,7 @@ namespace StakeMasterBussinessLogic.Test
 				Assert.AreEqual(string.Empty, e.Argument);
 				throw;
 			}
+
 			//Assert
 			//[ExpectedException(typeof(SettingsArgumentInvalidException))]
 		}
@@ -236,7 +240,8 @@ namespace StakeMasterBussinessLogic.Test
 		[DataRow(new[] {"-a=adr1", "--collectaddress=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "--collectaddress=adr3"}, "(-c=|--collectaddress=)")]
 		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "-q=pass2"}, "(-q=|--walletpassword=)")]
 		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "--walletpassword=pass2"}, "(-q=|--walletpassword=)")]
-		[DataRow(new[] {"--stakeaddress=adr1", "-c=adr2", "--walletpassword=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "--walletpassword=pass2" }, "(-q=|--walletpassword=)")]
+		[DataRow(new[] {"--stakeaddress=adr1", "-c=adr2", "--walletpassword=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "--walletpassword=pass2"},
+			"(-q=|--walletpassword=)")]
 		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "-u=user2"}, "(-u=|--user=)")]
 		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "--user=user2"}, "(-u=|--user=)")]
 		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "--user=user", "-p=pass", "-o=localhost:1234", "--user=user2"}, "(-u=|--user=)")]
@@ -257,7 +262,8 @@ namespace StakeMasterBussinessLogic.Test
 		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "--collectinputs=true", "--collectinputs=false"}, "(-i=|--collectinputs=)")]
 		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "-e=adr3,adr5", "-e=adr6,adr7"}, "(-e=|--excludeaddress=)")]
 		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "-e=adr3,adr5", "--excludeaddress=adr6,adr7"}, "(-e=|--excludeaddress=)")]
-		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "--excludeaddress=adr3,adr5", "--excludeaddress=adr6,adr7"}, "(-e=|--excludeaddress=)")]
+		[DataRow(new[] {"-a=adr1", "-c=adr2", "-q=pass2", "-u=user", "-p=pass", "-o=localhost:1234", "--excludeaddress=adr3,adr5", "--excludeaddress=adr6,adr7"},
+			"(-e=|--excludeaddress=)")]
 		public void Read_MandatoryArgumentDuplicate(string[] args, string argument)
 		{
 			//Arrange
@@ -272,6 +278,7 @@ namespace StakeMasterBussinessLogic.Test
 				Assert.AreEqual(argument, e.Argument);
 				throw;
 			}
+
 			//Assert
 			//[ExpectedException(typeof(SettingsArgumentInvalidException))]
 		}
@@ -298,6 +305,7 @@ namespace StakeMasterBussinessLogic.Test
 				Assert.AreEqual(argument, e.Argument);
 				throw;
 			}
+
 			//Assert
 			//[ExpectedException(typeof(SettingsArgumentInvalidException))]
 		}

@@ -40,7 +40,11 @@ namespace StakeMaster
 		///     <value>null</value>
 		///     .
 		/// </exception>
-		public StakeSettings(bool editStakes, [NotNull] string dedicatedStakingAddress, [NotNull] string dedicatedCollectingAddress, int stakingPatience, [NotNull] string walletPassword)
+		public StakeSettings(bool editStakes,
+		                     [NotNull] string dedicatedStakingAddress,
+		                     [NotNull] string dedicatedCollectingAddress,
+		                     int stakingPatience,
+		                     [NotNull] string walletPassword)
 		{
 			DedicatedStakingAddress = dedicatedStakingAddress ?? throw new ArgumentNullException(nameof(dedicatedStakingAddress));
 			DedicatedCollectingAddress = dedicatedCollectingAddress ?? throw new ArgumentNullException(nameof(dedicatedCollectingAddress));
@@ -62,12 +66,6 @@ namespace StakeMaster
 		public string DedicatedStakingAddress { get; }
 
 		/// <summary>
-		///     Gets the password of the wallet.
-		/// </summary>
-		[NotNull]
-		public string WalletPassword { get; }
-
-		/// <summary>
 		///     If
 		///     <value>true</value>
 		///     inputs of the <see cref="DedicatedStakingAddress" /> will be edited and new inputs will be created if there are
@@ -82,5 +80,11 @@ namespace StakeMaster
 		///     Gets the number of days during an input should at least stake one time.
 		/// </summary>
 		public int StakingPatience { get; }
+
+		/// <summary>
+		///     Gets the password of the wallet.
+		/// </summary>
+		[NotNull]
+		public string WalletPassword { get; }
 	}
 }

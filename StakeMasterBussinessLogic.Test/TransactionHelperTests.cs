@@ -1,4 +1,14 @@
-﻿namespace StakeMasterBussinessLogic.Test
+﻿// ******************************* Module Header *******************************
+// Module Name: TransactionHelperTests.cs
+// Project:     StakeMasterBussinessLogic.Test
+// Copyright (c) Michael Goldfinger.
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// *****************************************************************************
+
+namespace StakeMasterBussinessLogic.Test
 {
 	using System;
 	using System.Diagnostics.CodeAnalysis;
@@ -11,6 +21,28 @@
 	[ExcludeFromCodeCoverage]
 	public sealed class TransactionHelperTests
 	{
+		[TestMethod]
+		public void Constructor_SetBaseDate()
+		{
+			//Arrange
+			var expectedBaseDate = new DateTime(2016, 11, 20);
+			//Act
+			var result = new TransactionHelper(1, 1, 581, 1, new DateTime(2016, 11, 20), 60);
+			//Assert
+			Assert.AreEqual(expectedBaseDate, result.BaseDate);
+		}
+
+		[TestMethod]
+		public void Constructor_SetConnectionTimeout()
+		{
+			//Arrange
+			const int expectedTimeout = 60;
+			//Act
+			var result = new TransactionHelper(1, 1, 581, 1, DateTime.Now, 60);
+			//Assert
+			Assert.AreEqual(expectedTimeout, result.ConnectionTimeout);
+		}
+
 		[TestMethod]
 		public void Constructor_SetFreeByteLimit()
 		{
@@ -55,33 +87,18 @@
 			Assert.AreEqual(expectedOverhead, result.TransactionOverhead);
 		}
 
-		[TestMethod]
-		public void Constructor_SetBaseDate()
-		{
-			//Arrange
-			var expectedBaseDate = new DateTime(2016, 11, 20);
-			//Act
-			var result = new TransactionHelper(1, 1, 581, 1, new DateTime(2016, 11, 20), 60);
-			//Assert
-			Assert.AreEqual(expectedBaseDate, result.BaseDate);
-		}
-
-		[TestMethod]
-		public void Constructor_SetConnectionTimeout()
-		{
-			//Arrange
-			const int expectedTimeout = 60;
-			//Act
-			var result = new TransactionHelper(1, 1, 581, 1, DateTime.Now, 60);
-			//Assert
-			Assert.AreEqual(expectedTimeout, result.ConnectionTimeout);
-		}
-
 		[DataTestMethod]
 		[DataRow(23, 3, 62, 200, 3, "2017-05-16", 60, 5)]
 		[DataRow(17, 12, 100, 1200, 20, "2017-05-16", 60, 50)]
 		[DataRow(10, 11, 12, 77, 5, "2017-05-16", 60, 1)]
-		public void GetMaxPossibleInputCountForFreeTransaction_Default(int inputSize, int outputSize, int overhead, int byteLimit, int outputs, string date, int timeout, int expectedResult)
+		public void GetMaxPossibleInputCountForFreeTransaction_Default(int inputSize,
+		                                                               int outputSize,
+		                                                               int overhead,
+		                                                               int byteLimit,
+		                                                               int outputs,
+		                                                               string date,
+		                                                               int timeout,
+		                                                               int expectedResult)
 		{
 			//Arrange
 			DateTime dateTime = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -109,7 +126,14 @@
 		[DataRow(23, 3, 62, 200, 3, "2017-05-16", 60, 23)]
 		[DataRow(17, 12, 100, 1200, 20, "2017-05-16", 60, 63)]
 		[DataRow(10, 11, 12, 73, 5, "2017-05-16", 60, 1)]
-		public void GetMaxPossibleOutputCountForFreeTransaction_Default(int inputSize, int outputSize, int overhead, int byteLimit, int inputs, string date, int timeout, int expectedResult)
+		public void GetMaxPossibleOutputCountForFreeTransaction_Default(int inputSize,
+		                                                                int outputSize,
+		                                                                int overhead,
+		                                                                int byteLimit,
+		                                                                int inputs,
+		                                                                string date,
+		                                                                int timeout,
+		                                                                int expectedResult)
 		{
 			//Arrange
 			DateTime dateTime = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);

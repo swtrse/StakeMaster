@@ -17,7 +17,8 @@ namespace StakeMaster
 	using Microsoft.Extensions.Configuration;
 	using Serilog;
 
-	internal class Program
+	[UsedImplicitly]
+	internal sealed class Program
 	{
 		private static IConfiguration Configuration { get; } = InitializeAppSettings();
 

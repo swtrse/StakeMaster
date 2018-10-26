@@ -18,7 +18,6 @@ namespace StakeMaster.DataAccess
 	using JetBrains.Annotations;
 	using Newtonsoft.Json;
 	using Rpc;
-	using RpcResponseTypes;
 	using Serilog;
 
 	public class AccessWallet
@@ -29,8 +28,9 @@ namespace StakeMaster.DataAccess
 			ConnectionSettings = connectionSettings;
 			Timeout = timeout;
 		}
-		private int Timeout { get; }
+
 		private ConnectionSettings ConnectionSettings { get; }
+		private int Timeout { get; }
 
 		private T CallWallet<T>(string method, params object[] parameters)
 		{
@@ -73,6 +73,9 @@ namespace StakeMaster.DataAccess
 			}
 		}
 
+		public string CreateRawTransaction([NotNull] CreateRawTransactionRequest rawTransactionRequest) =>
+			CallWallet<string>("createrawtransaction", rawTransactionRequest.Inputs, rawTransactionRequest.Outputs);
+
 		public decimal GetStakeSplitThreshold() => CallWallet<decimal>("getstakesplitthreshold");
 
 		public GetTransactionResponse GetTransaction(string transactionId, bool includeWatchonly = false) =>
@@ -85,6 +88,14 @@ namespace StakeMaster.DataAccess
 			return CallWallet<List<ListReceivedByAccountResponse>>("listreceivedbyaddress");
 		}
 
+		public List<ListUnspentResponse> ListUnspent(int minimumConfirmations = 1, int maximumConfirmations = 999999, List<string> addresses = null)
+		{
+			addresses = addresses ?? new List<string>();
+			return CallWallet<List<ListUnspentResponse>>("listunspent", minimumConfirmations, maximumConfirmations, addresses);
+		}
+
+		public string SendRawTransaction(string transaction, bool allowHighFees = false) => CallWallet<string>("sendrawtransaction", transaction, allowHighFees);
+
 		[NotNull]
 		private WebRequest SetAuthHeader([NotNull] WebRequest webRequest)
 		{
@@ -94,35 +105,20 @@ namespace StakeMaster.DataAccess
 			return webRequest;
 		}
 
+		public void SetStakeSplitThreshold(int amount)
+		{
+			CallWallet<object>("setstakesplitthreshold", amount);
+		}
+
+		public SignRawTransactionResponse SignRawTransaction(string transaction,
+		                                                     [CanBeNull] List<string> previousTransactions = null,
+		                                                     [CanBeNull] List<string> privateKeys = null,
+		                                                     string signatureHashType = "ALL") =>
+			CallWallet<SignRawTransactionResponse>("signrawtransaction", transaction, previousTransactions, privateKeys, signatureHashType);
+
 		public void WalletLock() => CallWallet<object>("walletlock");
 
 		public void WalletPassphrase(string password, int secondsTillLock, bool anonymizeOnly = false) =>
 			CallWallet<object>("walletpassphrase", password, secondsTillLock, anonymizeOnly);
-
-		public List<ListUnspentResponse> ListUnspent(int minimumConfirmations = 1, int maximumConfirmations = 999999, List<string> addresses = null)
-		{
-			addresses = addresses ?? new List<string>();
-			return CallWallet<List<ListUnspentResponse>>("listunspent", minimumConfirmations, maximumConfirmations, addresses);
-		}
-
-		public string CreateRawTransaction(CreateRawTransactionRequest rawTransactionRequest)
-		{
-			return CallWallet<string>("createrawtransaction", rawTransactionRequest.Inputs, rawTransactionRequest.Outputs);
-		}
-
-		public SignRawTransactionResponse SignRawTransaction(string transaction, List<string> previousTransactions = null, List<string> privateKeys = null, string signatureHashType = "ALL")
-		{
-			return CallWallet<SignRawTransactionResponse>("signrawtransaction", transaction, previousTransactions, privateKeys, signatureHashType);
-		}
-
-		public string SendRawTransaction(string transaction, bool allowHighFees = false)
-		{
-			return CallWallet<string>("sendrawtransaction", transaction, allowHighFees);
-		}
-
-		public void SetStakeSplitThreshold(int amount)
-		{
-			CallWallet<object>("setstakesplitthreshold", (int)amount);
-		}
 	}
 }

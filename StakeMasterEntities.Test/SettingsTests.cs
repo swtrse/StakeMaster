@@ -12,7 +12,6 @@ namespace StakeMaster.Entities
 {
 	using System;
 	using System.Diagnostics.CodeAnalysis;
-	using System.Security;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 	[TestClass]

@@ -1,6 +1,6 @@
 ﻿// ******************************* Module Header *******************************
 // Module Name: GetTransactionResponse.cs
-// Project:     StakeMasterDataAccess
+// Project:     StakeMasterEntities
 // Copyright (c) Michael Goldfinger.
 // 
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
@@ -8,11 +8,11 @@
 // WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 // *****************************************************************************
 
-namespace StakeMaster.DataAccess.RpcResponseTypes
+namespace StakeMaster.Rpc
 {
 	using System.Collections.Generic;
 
-	public class GetTransactionResponse
+	public sealed class GetTransactionResponse
 	{
 		public decimal Amount { get; set; }
 		public string BlockHash { get; set; }

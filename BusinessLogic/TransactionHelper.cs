@@ -19,6 +19,27 @@ namespace StakeMaster.BusinessLogic
 	[PublicAPI]
 	public sealed class TransactionHelper
 	{
+		/// <summary>
+		///     Initializes a new instance of the <see cref="ProcessWallet" /> class.
+		/// </summary>
+		/// <param name="inputSize">
+		///     The size in bytes one input needs when added to a transaction.
+		/// </param>
+		/// <param name="outputSize">
+		///     The size in bytes one output need when added to a transaction.
+		/// </param>
+		/// <param name="transactionOverhead">
+		///     The size in bytes for the transaction overhead.
+		/// </param>
+		/// <param name="freeTransactionByteLimit">
+		///     The allowed size a transaction can have for zero fees.
+		/// </param>
+		/// <param name="baseDate">
+		///     The date where the time is based on in the block data.
+		/// </param>
+		/// <param name="connectionTimeout">
+		///     The time in seconds the client will wait for a response before cancel.
+		/// </param>
 		/// <inheritdoc />
 		public TransactionHelper(int inputSize, int outputSize, int transactionOverhead, int freeTransactionByteLimit, DateTime baseDate, int connectionTimeout)
 		{
@@ -31,12 +52,12 @@ namespace StakeMaster.BusinessLogic
 		}
 
 		/// <summary>
-		/// Date where Blocktime is based on.
+		///     Date where Blocktime is based on.
 		/// </summary>
 		public DateTime BaseDate { get; }
 
 		/// <summary>
-		/// Timeout for the Rpc Connection in seconds.
+		///     Timeout for the Rpc Connection in seconds.
 		/// </summary>
 		public int ConnectionTimeout { get; }
 
@@ -124,6 +145,6 @@ namespace StakeMaster.BusinessLogic
 		/// <returns>
 		///     The calculated transaction size;
 		/// </returns>
-		public int GetTransactionSize(int numberOfInputs, int numberOfOutputs) => (numberOfInputs * InputSize) + (numberOfOutputs * OutputSize) + TransactionOverhead;
+		public int GetTransactionSize(int numberOfInputs, int numberOfOutputs) => numberOfInputs * InputSize + numberOfOutputs * OutputSize + TransactionOverhead;
 	}
 }

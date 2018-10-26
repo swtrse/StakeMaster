@@ -1,6 +1,6 @@
 ﻿// ******************************* Module Header *******************************
-// Module Name: WalletRpcError.cs
-// Project:     StakeMasterDataAccess
+// Module Name: ListReceivedByAccountResponse.cs
+// Project:     StakeMasterEntities
 // Copyright (c) Michael Goldfinger.
 // 
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
@@ -8,16 +8,16 @@
 // WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 // *****************************************************************************
 
-namespace StakeMaster.DataAccess.RpcResponseTypes
+namespace StakeMaster.Rpc
 {
-	using Newtonsoft.Json;
+	using System.Collections.Generic;
 
-	internal sealed class WalletRpcError
+	public sealed class ListReceivedByAccountResponse
 	{
-		[JsonProperty(PropertyName = "code")]
-		public int Code { get; set; }
-
-		[JsonProperty(PropertyName = "message")]
-		public string Message { get; set; }
+		public string Account { get; set; }
+		public string Address { get; set; }
+		public decimal Amount { get; set; }
+		public int Confirmations { get; set; }
+		public List<string> TxIds { get; set; }
 	}
 }

@@ -1,5 +1,5 @@
 ﻿// ******************************* Module Header *******************************
-// Module Name: CreateRawTransactionRequest.cs
+// Module Name: GetTransactionResponseDetails.cs
 // Project:     StakeMasterEntities
 // Copyright (c) Michael Goldfinger.
 // 
@@ -10,17 +10,14 @@
 
 namespace StakeMaster.Rpc
 {
-	using System.Collections.Generic;
-
-	public sealed class CreateRawTransactionRequest
+	public sealed class GetTransactionResponseDetails
 	{
-		public CreateRawTransactionRequest(IList<CreateRawTransactionInput> inputs, IDictionary<string, decimal> outputs)
-		{
-			Inputs = inputs;
-			Outputs = outputs;
-		}
-
-		public IList<CreateRawTransactionInput> Inputs { get; }
-		public IDictionary<string, decimal> Outputs { get; }
+		public string Account { get; set; }
+		public string Address { get; set; }
+		public decimal Amount { get; set; }
+		public string Category { get; set; }
+		public decimal Fee { get; set; }
+		public string Label { get; set; }
+		public int Vout { get; set; }
 	}
 }

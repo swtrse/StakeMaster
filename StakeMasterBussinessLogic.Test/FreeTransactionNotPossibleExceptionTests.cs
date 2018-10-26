@@ -1,9 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// ******************************* Module Header *******************************
+// Module Name: FreeTransactionNotPossibleExceptionTests.cs
+// Project:     StakeMasterBussinessLogic.Test
+// Copyright (c) Michael Goldfinger.
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// *****************************************************************************
 
 namespace StakeMasterBussinessLogic.Test
 {
+	using System;
 	using System.Diagnostics.CodeAnalysis;
 	using System.IO;
 	using System.Runtime.Serialization;
@@ -14,7 +21,7 @@ namespace StakeMasterBussinessLogic.Test
 	[TestClass]
 	[TestCategory("Unit")]
 	[ExcludeFromCodeCoverage]
-	public class FreeTransactionNotPossibleExceptionTests
+	public sealed class FreeTransactionNotPossibleExceptionTests
 	{
 		[TestMethod]
 		public void Constructor_ArgumentsAndExceptionSet()
@@ -24,7 +31,8 @@ namespace StakeMasterBussinessLogic.Test
 			const int expectedOutput = 2;
 			const int expectedSize = 3;
 			const int expectedFree = 4;
-			string expectedMessage = $"A free Transaction is not possible with the given values.{Environment.NewLine}Inputs: 1{Environment.NewLine}Outputs: 2{Environment.NewLine}Calculated transaction size: 3{Environment.NewLine}Zero fee transaction size limit: 4";
+			string expectedMessage =
+				$"A free Transaction is not possible with the given values.{Environment.NewLine}Inputs: 1{Environment.NewLine}Outputs: 2{Environment.NewLine}Calculated transaction size: 3{Environment.NewLine}Zero fee transaction size limit: 4";
 			//Act
 			var result = new FreeTransactionNotPossibleException(1, 2, 3, 4, new Exception("inner"));
 			//Assert
@@ -44,7 +52,8 @@ namespace StakeMasterBussinessLogic.Test
 			const int expectedOutput = 2;
 			const int expectedSize = 3;
 			const int expectedFree = 4;
-			string expectedMessage = $"A free Transaction is not possible with the given values.{Environment.NewLine}Inputs: 1{Environment.NewLine}Outputs: 2{Environment.NewLine}Calculated transaction size: 3{Environment.NewLine}Zero fee transaction size limit: 4";
+			string expectedMessage =
+				$"A free Transaction is not possible with the given values.{Environment.NewLine}Inputs: 1{Environment.NewLine}Outputs: 2{Environment.NewLine}Calculated transaction size: 3{Environment.NewLine}Zero fee transaction size limit: 4";
 			//Act
 			var result = new FreeTransactionNotPossibleException(1, 2, 3, 4);
 			//Assert
@@ -80,7 +89,7 @@ namespace StakeMasterBussinessLogic.Test
 			// Act
 			formatter.Serialize(ms, originalException);
 			ms.Position = 0;
-			var deserializedException = (FreeTransactionNotPossibleException)formatter.Deserialize(ms);
+			var deserializedException = (FreeTransactionNotPossibleException) formatter.Deserialize(ms);
 
 			// Assert
 			Assert.AreEqual(originalException.InputCount, deserializedException.InputCount);

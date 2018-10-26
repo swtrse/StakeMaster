@@ -23,31 +23,6 @@ namespace StakeMaster.BusinessLogic
 	public sealed class FreeTransactionNotPossibleException : Exception
 	{
 		/// <summary>
-		///     Gets the calculated size of the transaction.
-		/// </summary>
-		public int CalculatedTransactionSize { get; }
-
-		/// <summary>
-		///     Gets the actual size limit for zero fee transactions.
-		/// </summary>
-		public int FreeTransactionByteLimit { get; }
-
-		/// <summary>
-		///     Gets the number of inputs for the transaction.
-		/// </summary>
-		public int InputCount { get; }
-
-		/// <inheritdoc />
-		[NotNull]
-		public override string Message =>
-			$"{base.Message}{Environment.NewLine}{Resources.FreeTransactionNotPossibleException_InputCount_Name} {InputCount}{Environment.NewLine}{Resources.FreeTransactionNotPossibleException_OutputCount_Name} {OutputCount}{Environment.NewLine}{Resources.FreeTransactionNotPossibleException_Size_Name} {CalculatedTransactionSize}{Environment.NewLine}{Resources.FreeTransactionNotPossibleException_Free_Name} {FreeTransactionByteLimit}";
-
-		/// <summary>
-		///     Gets the number of outputs for the transaction.
-		/// </summary>
-		public int OutputCount { get; }
-
-		/// <summary>
 		///     Initializes a new instance of the <see cref="FreeTransactionNotPossibleException" /> class.
 		/// </summary>
 		/// <param name="inputCount">The number of inputs for the transaction.</param>
@@ -94,6 +69,31 @@ namespace StakeMaster.BusinessLogic
 			CalculatedTransactionSize = info.GetInt32("CalculatedTransactionSize");
 			FreeTransactionByteLimit = info.GetInt32("FreeTransactionByteLimit");
 		}
+
+		/// <summary>
+		///     Gets the calculated size of the transaction.
+		/// </summary>
+		public int CalculatedTransactionSize { get; }
+
+		/// <summary>
+		///     Gets the actual size limit for zero fee transactions.
+		/// </summary>
+		public int FreeTransactionByteLimit { get; }
+
+		/// <summary>
+		///     Gets the number of inputs for the transaction.
+		/// </summary>
+		public int InputCount { get; }
+
+		/// <inheritdoc />
+		[NotNull]
+		public override string Message =>
+			$"{base.Message}{Environment.NewLine}{Resources.FreeTransactionNotPossibleException_InputCount_Name} {InputCount}{Environment.NewLine}{Resources.FreeTransactionNotPossibleException_OutputCount_Name} {OutputCount}{Environment.NewLine}{Resources.FreeTransactionNotPossibleException_Size_Name} {CalculatedTransactionSize}{Environment.NewLine}{Resources.FreeTransactionNotPossibleException_Free_Name} {FreeTransactionByteLimit}";
+
+		/// <summary>
+		///     Gets the number of outputs for the transaction.
+		/// </summary>
+		public int OutputCount { get; }
 
 		/// <inheritdoc />
 		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]

@@ -8,29 +8,6 @@
             <summary>Represents errors that occur when no zero fee transaction is possible.</summary>
             <inheritdoc />
         </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.CalculatedTransactionSize">
-            <summary>
-                Gets the calculated size of the transaction.
-            </summary>
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.FreeTransactionByteLimit">
-            <summary>
-                Gets the actual size limit for zero fee transactions.
-            </summary>
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.InputCount">
-            <summary>
-                Gets the number of inputs for the transaction.
-            </summary>
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.Message">
-            <inheritdoc />
-        </member>
-        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.OutputCount">
-            <summary>
-                Gets the number of outputs for the transaction.
-            </summary>
-        </member>
         <member name="M:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
                 Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException" /> class.
@@ -59,11 +36,53 @@
         <member name="M:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <inheritdoc />
         </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.CalculatedTransactionSize">
+            <summary>
+                Gets the calculated size of the transaction.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.FreeTransactionByteLimit">
+            <summary>
+                Gets the actual size limit for zero fee transactions.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.InputCount">
+            <summary>
+                Gets the number of inputs for the transaction.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.Message">
+            <inheritdoc />
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.OutputCount">
+            <summary>
+                Gets the number of outputs for the transaction.
+            </summary>
+        </member>
         <member name="M:StakeMaster.BusinessLogic.FreeTransactionNotPossibleException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <inheritdoc />
         </member>
+        <member name="T:StakeMaster.BusinessLogic.ProcessWallet">
+            <summary>
+                Contains the core logic for the StakeMaster features.
+            </summary>
+        </member>
         <member name="M:StakeMaster.BusinessLogic.ProcessWallet.#ctor(StakeMaster.Settings,StakeMaster.BusinessLogic.TransactionHelper)">
+            <summary>
+                Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.ProcessWallet" /> class.
+            </summary>
+            <param name="settings">
+                The settings for the current run.
+            </param>
+            <param name="transactionHelper">
+                The transaction settings for the current run.
+            </param>
             <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.BusinessLogic.ProcessWallet.Run">
+            <summary>
+                Process all operations on the wallet based on the current settings.
+            </summary>
         </member>
         <member name="T:StakeMaster.BusinessLogic.Properties.Resources">
             <summary>
@@ -247,16 +266,37 @@
             </summary>
         </member>
         <member name="M:StakeMaster.BusinessLogic.TransactionHelper.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.DateTime,System.Int32)">
+            <summary>
+                Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.ProcessWallet" /> class.
+            </summary>
+            <param name="inputSize">
+                The size in bytes one input needs when added to a transaction.
+            </param>
+            <param name="outputSize">
+                The size in bytes one output need when added to a transaction.
+            </param>
+            <param name="transactionOverhead">
+                The size in bytes for the transaction overhead.
+            </param>
+            <param name="freeTransactionByteLimit">
+                The allowed size a transaction can have for zero fees.
+            </param>
+            <param name="baseDate">
+                The date where the time is based on in the block data.
+            </param>
+            <param name="connectionTimeout">
+                The time in seconds the client will wait for a response before cancel.
+            </param>
             <inheritdoc />
         </member>
         <member name="P:StakeMaster.BusinessLogic.TransactionHelper.BaseDate">
             <summary>
-            Date where Blocktime is based on.
+                Date where Blocktime is based on.
             </summary>
         </member>
         <member name="P:StakeMaster.BusinessLogic.TransactionHelper.ConnectionTimeout">
             <summary>
-            Timeout for the Rpc Connection in seconds.
+                Timeout for the Rpc Connection in seconds.
             </summary>
         </member>
         <member name="P:StakeMaster.BusinessLogic.TransactionHelper.FreeTransactionByteLimit">
