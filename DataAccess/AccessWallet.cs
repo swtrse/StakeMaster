@@ -23,7 +23,7 @@ namespace StakeMaster.DataAccess
 	/// <summary>
 	///     Contains methods to access the wallet rpc api.
 	/// </summary>
-	public class AccessWallet
+	public sealed class AccessWallet
 	{
 		/// <inheritdoc />
 		public AccessWallet(ConnectionSettings connectionSettings, int timeout)
