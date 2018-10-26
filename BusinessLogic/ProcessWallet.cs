@@ -320,16 +320,6 @@ namespace StakeMaster.BusinessLogic
 			return ret;
 		}
 
-		//Used Commands: getstakesplitthreshold
-		//, *listreceivedbyaddress
-		//, walletpassphrase
-		//,listunspent
-		//, walletlock
-		//, createrawtransaction
-		//, signrawtransaction
-		//sendrawtransaction
-		//, setstakesplitthreshold
-
 		/// <summary>
 		///     Process all operations on the wallet based on the current settings.
 		/// </summary>
