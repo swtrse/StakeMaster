@@ -19,6 +19,7 @@ namespace StakeMaster.DataAccess
 	using Newtonsoft.Json;
 	using Rpc;
 	using RpcResponseTypes;
+	using Serilog;
 
 	public class AccessWallet
 	{
@@ -78,8 +79,11 @@ namespace StakeMaster.DataAccess
 			CallWallet<GetTransactionResponse>("gettransaction", transactionId, includeWatchonly);
 
 		[NotNull]
-		public IEnumerable<ListReceivedByAccountResponse> ListReceivedByAddress(int minimumConfirmations = 1, bool includeEmpty = false, bool includeWatchonly = false) =>
-			CallWallet<List<ListReceivedByAccountResponse>>("listreceivedbyaddress", minimumConfirmations, includeEmpty, includeWatchonly);
+		public List<ListReceivedByAccountResponse> ListReceivedByAddress()
+		{
+			Log.Debug("ListReceivedByAddress() started.");
+			return CallWallet<List<ListReceivedByAccountResponse>>("listreceivedbyaddress");
+		}
 
 		[NotNull]
 		private WebRequest SetAuthHeader([NotNull] WebRequest webRequest)
