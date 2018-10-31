@@ -365,7 +365,10 @@ namespace StakeMaster.BusinessLogic
 			{
 				Log.Information($"Waiting for {waitingList.Count} transactions to complete.");
 				Task.Delay(TimeSpan.FromSeconds(10)).Wait();
-				waitingList = waitingList.Where(t => AccessWallet.GetTransaction(t).Confirmations == 0).ToList();
+				//Some wallets do not allow Zero Fee transactions if the inputs have 0 or even 1 confirmation.
+				//The wallets are not consistent in that, there are wallets that sometimes let the transaction happen
+				//and sometimes the refuse. There seem to be no logic behind that behavior.
+				waitingList = waitingList.Where(t => AccessWallet.GetTransaction(t).Confirmations <= 1).ToList();
 			}
 
 			Log.Information("All transactions complete.");

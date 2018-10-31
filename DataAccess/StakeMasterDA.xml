@@ -9,8 +9,91 @@
                 Contains methods for file and wallet read and write operations.
             </summary>
         </member>
+        <member name="T:StakeMaster.DataAccess.AccessWallet">
+            <summary>
+                Contains methods to access the wallet rpc api.
+            </summary>
+        </member>
         <member name="M:StakeMaster.DataAccess.AccessWallet.#ctor(StakeMaster.ConnectionSettings,System.Int32)">
             <inheritdoc />
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.CreateRawTransaction(StakeMaster.Rpc.CreateRawTransactionRequest)">
+            <summary>
+                Creates a new raw transaction.
+            </summary>
+            <param name="rawTransactionRequest">The request holding the inputs and outputs for the transaction.</param>
+            <returns>
+                The hex string of the transaction.
+            </returns>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.GetStakeSplitThreshold">
+            <summary>
+                Returns the threshold for stake splitting.
+            </summary>
+            <returns>The threshold value.</returns>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.GetTransaction(System.String)">
+            <summary>
+                Get detailed information about in-wallet transaction.
+            </summary>
+            <param name="transactionId">The transaction id.</param>
+            <returns>A <see cref="T:StakeMaster.Rpc.GetTransactionResponse" />-object holding the result.</returns>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.ListReceivedByAddress">
+            <summary>
+                List balances by receiving address.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1" />-object holding the result.</returns>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.ListUnspent(System.Int32,System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+                Returns a List of unspent transaction outputs with between minimumConfirmations and maximumConfirmations
+                (inclusive) confirmations.
+            </summary>
+            <param name="minimumConfirmations">
+                The minimum confirmations to filter. (Default=1).
+            </param>
+            <param name="maximumConfirmations">
+                The maximum confirmations to filter. (Default=999999).
+            </param>
+            <param name="addresses">A list of addresses to filter.</param>
+            <returns>A <see cref="T:System.Collections.Generic.List`1" />-object holding the result.</returns>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.SendRawTransaction(System.String)">
+            <summary>
+                Submits raw transaction (serialized, hex-encoded) to local node and network.
+            </summary>
+            <param name="transaction">The hex string of the raw transaction.</param>
+            <returns>The transaction hash in hex.</returns>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.SetStakeSplitThreshold(System.Int32)">
+            <summary>
+                This will set the output size of your stakes to never be below this number.
+            </summary>
+            <param name="amount">Threshold value between 1 and 999999.</param>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.SignRawTransaction(System.String)">
+            <summary>
+                Sign inputs for raw transaction (serialized, hex-encoded).
+            </summary>
+            <param name="transaction">The transaction hex string.</param>
+            <returns>A <see cref="T:StakeMaster.Rpc.SignRawTransactionResponse" />-object holding the result.</returns>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.WalletLock">
+            <summary>
+                Removes the wallet encryption key from memory, locking the wallet.
+            </summary>
+        </member>
+        <member name="M:StakeMaster.DataAccess.AccessWallet.WalletPassphrase(System.String,System.Int32,System.Boolean)">
+            <summary>
+                Stores the wallet decryption key in memory for 'timeout' seconds.
+            </summary>
+            <param name="password">The wallet passphrase.</param>
+            <param name="secondsTillLock">
+                The time to keep the decryption key in seconds. A timeout of "0" unlocks until the wallet
+                is closed.
+            </param>
+            <param name="anonymizeOnly">If is true sending functions are disabled.</param>
         </member>
     </members>
 </doc>
