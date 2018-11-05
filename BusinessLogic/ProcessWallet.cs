@@ -246,74 +246,52 @@ namespace StakeMaster.BusinessLogic
 			Log.Verbose("Parameter addresses: {@addresses}.", addresses);
 			Log.Verbose("Parameter minimunNeededInputs: {minimunNeededInputs}.", minimunNeededInputs);
 
-			const int maxTries = 10;
-			var finished = false;
-			var currentTry = 0;
 			var transactionList = new List<string>();
 			int maxInputs = TransactionHelper.GetMaxPossibleInputCountForFreeTransaction(1);
 			Log.Verbose("Allowed inputs: {maxInputs}.", maxInputs);
 
-			while (!finished)
+			List<ListUnspentResponse> transactions = AccessWallet.ListUnspent(1, int.MaxValue, addresses);
+			Log.Verbose("Transactions: {@transactions}.", transactions);
+			transactions = transactions.Where(t => t.Amount > 0M).ToList();
+
+			var tCount = 0;
+			var inputs = new List<CreateRawTransactionInput>();
+			var outputs = new Dictionary<string, decimal>();
+			var amount = 0M;
+
+			if (transactions.Count >= minimunNeededInputs)
 			{
-				try
+				string plural = transactions.Count > 1 ? "s" : string.Empty;
+				Log.Information($"Merge {transactions.Count} input{plural} to {Settings.Stake.DedicatedCollectingAddress}.");
+				foreach (ListUnspentResponse trans in transactions)
 				{
-					++currentTry;
-					List<ListUnspentResponse> transactions = AccessWallet.ListUnspent(1, int.MaxValue, addresses);
-					Log.Verbose("Transactions: {@transactions}.", transactions);
-					transactions = transactions.Where(t => t.Amount > 0M).ToList();
+					Log.Debug($"Include Transaction: {trans.TxId}.");
+					inputs.Add(new CreateRawTransactionInput {TxId = trans.TxId, Vout = trans.Vout});
+					amount += trans.Amount;
+					++tCount;
 
-					var tCount = 0;
-					var inputs = new List<CreateRawTransactionInput>();
-					var outputs = new Dictionary<string, decimal>();
-					var amount = 0M;
-
-					if (transactions.Count >= minimunNeededInputs)
+					if (tCount < maxInputs)
 					{
-						string plural = transactions.Count > 1 ? "s" : string.Empty;
-						Log.Information($"Merge {transactions.Count} input{plural} to {Settings.Stake.DedicatedCollectingAddress}.");
-						foreach (ListUnspentResponse trans in transactions)
-						{
-							Log.Debug($"Include Transaction: {trans.TxId}.");
-							inputs.Add(new CreateRawTransactionInput {TxId = trans.TxId, Vout = trans.Vout});
-							amount += trans.Amount;
-							++tCount;
-
-							if (tCount < maxInputs)
-							{
-								continue;
-							}
-
-							Log.Information($"Move {amount} coins to {Settings.Stake.DedicatedCollectingAddress} without fee.");
-							outputs.Add(Settings.Stake.DedicatedCollectingAddress, amount);
-							transactionList.Add(Send(inputs, outputs));
-							tCount = 0;
-							inputs = new List<CreateRawTransactionInput>();
-							outputs = new Dictionary<string, decimal>();
-							amount = 0M;
-						}
-					}
-
-					if (tCount > 0)
-					{
-						Log.Information($"Move {amount} coins to {Settings.Stake.DedicatedCollectingAddress} without fee.");
-						outputs.Add(Settings.Stake.DedicatedCollectingAddress, amount);
-						transactionList.Add(Send(inputs, outputs));
-					}
-
-					finished = true;
-				}
-				catch (Exception e)
-				{
-					if (currentTry <= maxTries)
-					{
-						Log.Warning(e, "An unresolveable Error occured. Retry.");
 						continue;
 					}
 
-					Log.Error(e, "An unresolveable Error occured. Giving up.");
-					finished = true;
+					Log.Information($"Move {amount} coins to {Settings.Stake.DedicatedCollectingAddress} without fee.");
+					outputs.Add(Settings.Stake.DedicatedCollectingAddress, amount);
+					transactionList.Add(Send(inputs, outputs));
+					tCount = 0;
+					inputs = new List<CreateRawTransactionInput>();
+					outputs = new Dictionary<string, decimal>();
+					amount = 0M;
 				}
 			}
+
+			if (tCount > 0)
+			{
+				Log.Information($"Move {amount} coins to {Settings.Stake.DedicatedCollectingAddress} without fee.");
+				outputs.Add(Settings.Stake.DedicatedCollectingAddress, amount);
+				transactionList.Add(Send(inputs, outputs));
+			}
+
 
 			List<string> ret = transactionList.Where(t => !string.IsNullOrWhiteSpace(t)).ToList();
 			Log.Verbose("Returnvalue of ProcessWallet.ProcessInputs(List<string> addresses, int minimunNeededInputs): {@ret}.", ret);
@@ -344,16 +322,41 @@ namespace StakeMaster.BusinessLogic
 		[CanBeNull]
 		private string Send(IList<CreateRawTransactionInput> inputs, IDictionary<string, decimal> outputs)
 		{
+			const int maxTries = 10;
+			var currentTry = 0;
+			var finished = false;
 			Log.Debug("Call of method: string ProcessWallet.Send(IList<CreateRawTransactionInput> inputs, IDictionary<string, decimal> outputs).");
 			Log.Verbose("Parameter inputs: {@inputs}.", inputs);
 			Log.Verbose("Parameter outputs: {@outputs}.", outputs);
-			var request = new CreateRawTransactionRequest(inputs, outputs);
-			string txId = AccessWallet.CreateRawTransaction(request);
+			while (!finished)
+			{
+				try
+				{
+					++currentTry;
+					var request = new CreateRawTransactionRequest(inputs, outputs);
+					string txId = AccessWallet.CreateRawTransaction(request);
 
-			SignRawTransactionResponse res = AccessWallet.SignRawTransaction(txId);
-			string ret = res.Complete ? AccessWallet.SendRawTransaction(res.Hex) : null;
-			Log.Verbose("Returnvalue of ProcessWallet.Send(IList<CreateRawTransactionInput> inputs, IDictionary<string, decimal> outputs): {ret}.", ret);
-			return ret;
+					SignRawTransactionResponse res = AccessWallet.SignRawTransaction(txId);
+					string ret = res.Complete ? AccessWallet.SendRawTransaction(res.Hex) : null;
+					finished = true;
+					Log.Verbose("Returnvalue of ProcessWallet.Send(IList<CreateRawTransactionInput> inputs, IDictionary<string, decimal> outputs): {ret}.", ret);
+					return ret;
+				}
+				catch (Exception e)
+				{
+					if (currentTry <= maxTries)
+					{
+						Log.Warning("Unable to send zero fee transaction. Retry...");
+						Task.Delay(TimeSpan.FromMinutes(1D)).Wait();
+						continue;
+					}
+
+					Log.Error(e, "An unresolveable Error occured. Giving up.");
+					throw;
+				}
+			}
+
+			throw new Exception("An unresolveable Error occured.");
 		}
 
 		private void WaitTillAllConfirmed([NotNull] List<string> transactions)
