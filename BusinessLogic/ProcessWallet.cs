@@ -77,14 +77,14 @@ namespace StakeMaster.BusinessLogic
 		{
 			Log.Debug("Call of method: decimal ProcessWallet.CheckForLowerThreshold(decimal stakeSplitThreshold).");
 			Log.Verbose("Parameter stakeSplitThreshold: {stakeSplitThreshold}.", stakeSplitThreshold);
-			decimal newStakeSplitThreshold = stakeSplitThreshold;
-			//If every staking input is not older than 1 day lower the thereshold
+			//If every staking input is not older than StakePatient/2 days lower the thereshold
 			List<ListUnspentResponse> stakeInputs = AccessWallet.ListUnspent(0, int.MaxValue, new List<string> {Settings.Stake.DedicatedStakingAddress});
 			if (stakeInputs.Count <= 0)
 			{
-				return Math.Min(stakeSplitThreshold, newStakeSplitThreshold);
+				return stakeSplitThreshold;
 			}
 
+			decimal newStakeSplitThreshold = stakeSplitThreshold;
 			ListUnspentResponse oldestInput = stakeInputs.OrderByDescending(s => s.Confirmations).First();
 			double waitDays = Settings.Stake.StakingPatience / 2D;
 
@@ -138,9 +138,9 @@ namespace StakeMaster.BusinessLogic
 			newStakeSplitThreshold = CheckForHigherThreshold(newStakeSplitThreshold);
 			if (stakeSplitThreshold != newStakeSplitThreshold)
 			{
-				Log.Information($"Set new staking threshold: {newStakeSplitThreshold}.");
+				Log.Information($"Set new staking threshold: {(int)newStakeSplitThreshold}.");
 				AccessWallet.SetStakeSplitThreshold((int) newStakeSplitThreshold);
-				stakeSplitThreshold = newStakeSplitThreshold;
+				stakeSplitThreshold = (int)newStakeSplitThreshold;
 			}
 
 			//Add Coins to low inputs
@@ -245,6 +245,13 @@ namespace StakeMaster.BusinessLogic
 			Log.Debug("Call of method: List<string> ProcessWallet.ProcessInputs(List<string> addresses, int minimunNeededInputs).");
 			Log.Verbose("Parameter addresses: {@addresses}.", addresses);
 			Log.Verbose("Parameter minimunNeededInputs: {minimunNeededInputs}.", minimunNeededInputs);
+
+			if(addresses.Count == 0)
+			{
+				var erg = new List<string>();
+				Log.Verbose("Returnvalue of ProcessWallet.ProcessInputs(List<string> addresses, int minimunNeededInputs): {@ret}.", erg);
+				return erg;
+			}
 
 			var transactionList = new List<string>();
 			int maxInputs = TransactionHelper.GetMaxPossibleInputCountForFreeTransaction(1);
