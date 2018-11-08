@@ -99,4 +99,4 @@ If you think the tool is great you can tip me
 	MonetaryUnit         : 7jazUQfTAZ9EafMwcieZ4gRRY6HLVzNfTx (best coin ever)
 	Bitcoin              : 1JoF1MuzdFUfQF4cr9g7X4sGdEkf7DTxQM
 	Syndicate            : SdXXExhpANigxrvxjKfC89V2h7EMo5UYEF
-	E-Sports betting coin: Ec85UETPMq2smXR9hKfRFyPnVJE8G739Tf
+	E-Sports betting coin: e7ctbechGNrDmNdJaHKWQ1AUqitbJ91bGc
