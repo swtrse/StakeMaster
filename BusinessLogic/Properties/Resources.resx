@@ -153,4 +153,7 @@
   <data name="FreeTransactionNotPossibleException_Size_Name" xml:space="preserve">
     <value>Calculated transaction size:</value>
   </data>
+	<data name="TransactionHelper_TransactionHelper_Confirms_OutOfRange" xml:space="preserve">
+    <value>Confirms must be greater 0.</value>
+  </data>
 </root>

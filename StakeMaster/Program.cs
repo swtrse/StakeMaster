@@ -31,7 +31,8 @@ namespace StakeMaster
 			                             section.GetValue<int>("Overhead"),
 			                             section.GetValue<int>("FreeTransactionSizeLimit"),
 			                             section.GetValue<DateTime>("BaseDateOfTransactions").Date,
-			                             section.GetValue<int>("RpcTimeoutInSeconds"));
+			                             section.GetValue<int>("RpcTimeoutInSeconds"),
+										  section.GetValue<int>("Confirms"));
 		}
 
 		private static IConfiguration InitializeAppSettings()

@@ -160,6 +160,11 @@
               Looks up a localized string similar to Argument is not unique..
             </summary>
         </member>
+        <member name="P:StakeMaster.BusinessLogic.Properties.Resources.TransactionHelper_TransactionHelper_Confirms_OutOfRange">
+            <summary>
+              Looks up a localized string similar to Confirms must be greater 0..
+            </summary>
+        </member>
         <member name="T:StakeMaster.BusinessLogic.SettingsArgumentInvalidException">
             <summary>Represents errors that occur when unexpected arguments are found.</summary>
             <inheritdoc />
@@ -265,7 +270,7 @@
                 Contains methods for handling transaction sizes.
             </summary>
         </member>
-        <member name="M:StakeMaster.BusinessLogic.TransactionHelper.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.DateTime,System.Int32)">
+        <member name="M:StakeMaster.BusinessLogic.TransactionHelper.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.DateTime,System.Int32,System.Int32)">
             <summary>
                 Initializes a new instance of the <see cref="T:StakeMaster.BusinessLogic.ProcessWallet" /> class.
             </summary>
@@ -287,6 +292,8 @@
             <param name="connectionTimeout">
                 The time in seconds the client will wait for a response before cancel.
             </param>
+            <param name="confirms">
+            The confirms needed to continue after sending a transaction.</param>
             <inheritdoc />
         </member>
         <member name="P:StakeMaster.BusinessLogic.TransactionHelper.BaseDate">
@@ -317,6 +324,11 @@
         <member name="P:StakeMaster.BusinessLogic.TransactionHelper.TransactionOverhead">
             <summary>
                 Gets the size in bytes for transaction overhead.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.BusinessLogic.TransactionHelper.Confirms">
+            <summary>
+            Gets the confirms to wait after sending a transaction.
             </summary>
         </member>
         <member name="M:StakeMaster.BusinessLogic.TransactionHelper.GetMaxPossibleInputCountForFreeTransaction(System.Int32)">

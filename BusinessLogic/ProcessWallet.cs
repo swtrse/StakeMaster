@@ -66,7 +66,14 @@ namespace StakeMaster.BusinessLogic
 			                                                    .ToList();
 			if (oldestInputs.Count > 0)
 			{
-				newStakeSplitThreshold = Math.Max(oldestInputs.Max(i => i.Amount), stakeSplitThreshold);
+				newStakeSplitThreshold = oldestInputs.Max(i => i.Amount);
+				newStakeSplitThreshold = Math.Floor(newStakeSplitThreshold);
+				if (newStakeSplitThreshold <= stakeSplitThreshold)
+				{
+					newStakeSplitThreshold = oldestInputs.Max(i => i.Amount) * 1.2M;
+					newStakeSplitThreshold = Math.Ceiling(newStakeSplitThreshold);
+				}
+				newStakeSplitThreshold = Math.Max(newStakeSplitThreshold, stakeSplitThreshold);
 			}
 
 			Log.Verbose("Returnvalue of ProcessWallet.CheckForHigherThreshold(decimal stakeSplitThreshold): {newStakeSplitThreshold}.", newStakeSplitThreshold);
@@ -91,7 +98,7 @@ namespace StakeMaster.BusinessLogic
 			DateTime blockdate = TransactionHelper.BaseDate.AddSeconds(AccessWallet.GetTransaction(oldestInput.TxId).BlockTime);
 			if (blockdate > DateTime.UtcNow.AddDays(-waitDays))
 			{
-				newStakeSplitThreshold = oldestInput.Amount > stakeSplitThreshold ? Math.Ceiling(oldestInput.Amount / 2) : Math.Ceiling(oldestInput.Amount);
+				newStakeSplitThreshold = oldestInput.Amount > stakeSplitThreshold ? Math.Ceiling(oldestInput.Amount * 0.8M) : Math.Ceiling(oldestInput.Amount);
 			}
 
 			decimal ret = Math.Min(stakeSplitThreshold, newStakeSplitThreshold);
@@ -240,13 +247,14 @@ namespace StakeMaster.BusinessLogic
 		}
 
 		[NotNull]
-		private List<string> ProcessInputs([NotNull] List<string> addresses, int minimunNeededInputs)
+		private List<string> ProcessInputs([NotNull] List<string> addresses, int minimunNeededInputs, decimal amountLock = decimal.MaxValue)
 		{
 			Log.Debug("Call of method: List<string> ProcessWallet.ProcessInputs(List<string> addresses, int minimunNeededInputs).");
 			Log.Verbose("Parameter addresses: {@addresses}.", addresses);
 			Log.Verbose("Parameter minimunNeededInputs: {minimunNeededInputs}.", minimunNeededInputs);
+			Log.Verbose("Parameter amount: {amountLock}.", amountLock);
 
-			if(addresses.Count == 0)
+			if (addresses.Count == 0)
 			{
 				var erg = new List<string>();
 				Log.Verbose("Returnvalue of ProcessWallet.ProcessInputs(List<string> addresses, int minimunNeededInputs): {@ret}.", erg);
@@ -259,7 +267,7 @@ namespace StakeMaster.BusinessLogic
 
 			List<ListUnspentResponse> transactions = AccessWallet.ListUnspent(1, int.MaxValue, addresses);
 			Log.Verbose("Transactions: {@transactions}.", transactions);
-			transactions = transactions.Where(t => t.Amount > 0M).ToList();
+			transactions = transactions.Where(t => t.Amount > 0M && t.Amount <= amountLock).ToList();
 
 			var tCount = 0;
 			var inputs = new List<CreateRawTransactionInput>();
@@ -318,12 +326,28 @@ namespace StakeMaster.BusinessLogic
 			IEnumerable<ListReceivedByAccountResponse> addresses = AccessWallet.ListReceivedByAddress();
 			//Move inputs too collect address
 			MoveToCollectAddress(addresses.Select(a => a.Address).ToList());
+			// Move small stakes to Collect Address
+			MoveSmallStakesToCollectAddress();
 			MinimizeInputs();
 			GenerateStakingInputs();
 			Log.Information("Lock wallet.");
 			AccessWallet.WalletLock();
 			Log.Information("Unlock wallet for staking only.");
 			AccessWallet.WalletPassphrase(Settings.Stake.WalletPassword, 0, true);
+		}
+
+		private void MoveSmallStakesToCollectAddress()
+		{
+			Log.Debug("Call of method: void ProcessWallet.MoveSmallStakesToCollectAddress().");
+			if (!Settings.Address.CollectInputs)
+			{
+				Log.Information("Input collection deactivated. No inputs will be moved to the collection address.");
+				return;
+			}
+
+			decimal stakeSplitThreshold = AccessWallet.GetStakeSplitThreshold();
+			List<string> transactions = ProcessInputs(new List<string>{Settings.Stake.DedicatedStakingAddress}, 1, stakeSplitThreshold * 0.7M);
+			WaitTillAllConfirmed(transactions);
 		}
 
 		[CanBeNull]
@@ -378,7 +402,7 @@ namespace StakeMaster.BusinessLogic
 				//Some wallets do not allow Zero Fee transactions if the inputs have 0 or even 1 confirmation.
 				//The wallets are not consistent in that, there are wallets that sometimes let the transaction happen
 				//and sometimes the refuse. There seem to be no logic behind that behavior.
-				waitingList = waitingList.Where(t => AccessWallet.GetTransaction(t).Confirmations <= 1).ToList();
+				waitingList = waitingList.Where(t => AccessWallet.GetTransaction(t).Confirmations < TransactionHelper.Confirms).ToList();
 			}
 
 			Log.Information("All transactions complete.");

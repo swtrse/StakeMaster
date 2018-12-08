@@ -167,5 +167,14 @@ namespace StakeMaster.BusinessLogic.Properties {
                 return ResourceManager.GetString("SettingsHelper_ExtractArgument_ArgumentNotUnique_Message", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirms must be greater 0..
+        /// </summary>
+        internal static string TransactionHelper_TransactionHelper_Confirms_OutOfRange {
+            get {
+                return ResourceManager.GetString("TransactionHelper_TransactionHelper_Confirms_OutOfRange", resourceCulture);
+            }
+        }
     }
 }

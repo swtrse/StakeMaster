@@ -12,6 +12,7 @@ namespace StakeMaster.BusinessLogic
 {
 	using System;
 	using JetBrains.Annotations;
+	using Properties;
 
 	/// <summary>
 	///     Contains methods for handling transaction sizes.
@@ -40,8 +41,10 @@ namespace StakeMaster.BusinessLogic
 		/// <param name="connectionTimeout">
 		///     The time in seconds the client will wait for a response before cancel.
 		/// </param>
+		/// <param name="confirms">
+		/// The confirms needed to continue after sending a transaction.</param>
 		/// <inheritdoc />
-		public TransactionHelper(int inputSize, int outputSize, int transactionOverhead, int freeTransactionByteLimit, DateTime baseDate, int connectionTimeout)
+		public TransactionHelper(int inputSize, int outputSize, int transactionOverhead, int freeTransactionByteLimit, DateTime baseDate, int connectionTimeout, int confirms)
 		{
 			InputSize = inputSize;
 			OutputSize = outputSize;
@@ -49,6 +52,7 @@ namespace StakeMaster.BusinessLogic
 			FreeTransactionByteLimit = freeTransactionByteLimit;
 			BaseDate = baseDate;
 			ConnectionTimeout = connectionTimeout;
+			Confirms = confirms < 1 ? throw new ArgumentOutOfRangeException(nameof(confirms), Resources.TransactionHelper_TransactionHelper_Confirms_OutOfRange) : confirms;
 		}
 
 		/// <summary>
@@ -80,6 +84,11 @@ namespace StakeMaster.BusinessLogic
 		///     Gets the size in bytes for transaction overhead.
 		/// </summary>
 		public int TransactionOverhead { get; }
+
+		/// <summary>
+		/// Gets the confirms to wait after sending a transaction.
+		/// </summary>
+		public int Confirms { get; }
 
 		/// <summary>
 		///     Gets the amount of inputs that can be included in a transaction.
