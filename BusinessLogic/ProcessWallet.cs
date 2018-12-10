@@ -98,7 +98,7 @@ namespace StakeMaster.BusinessLogic
 			DateTime blockdate = TransactionHelper.BaseDate.AddSeconds(AccessWallet.GetTransaction(oldestInput.TxId).BlockTime);
 			if (blockdate > DateTime.UtcNow.AddDays(-waitDays))
 			{
-				newStakeSplitThreshold = oldestInput.Amount > stakeSplitThreshold ? Math.Ceiling(oldestInput.Amount * 0.8M) : Math.Ceiling(oldestInput.Amount);
+				newStakeSplitThreshold = oldestInput.Amount >= stakeSplitThreshold ? Math.Ceiling(oldestInput.Amount * 0.8M) : Math.Ceiling(oldestInput.Amount);
 			}
 
 			decimal ret = Math.Min(stakeSplitThreshold, newStakeSplitThreshold);
