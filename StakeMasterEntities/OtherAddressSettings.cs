@@ -26,9 +26,10 @@ namespace StakeMaster
 		///     <see cref="StakeSettings.DedicatedCollectingAddress" />.
 		/// </param>
 		/// <param name="excludeAddresses">A list of addresses that are excluded from the move.</param>
-		public OtherAddressSettings(bool collectInputs, [CanBeNull] string[] excludeAddresses)
+		public OtherAddressSettings(bool collectInputs, [CanBeNull] string[] excludeAddresses, bool mergeInputs)
 		{
 			CollectInputs = collectInputs;
+			MergeInputs = mergeInputs;
 			ExcludeAddresses = excludeAddresses ?? new string[0];
 		}
 
@@ -41,6 +42,16 @@ namespace StakeMaster
 		///     no input will be moved.
 		/// </summary>
 		public bool CollectInputs { get; }
+
+		/// <summary>
+		///     When
+		///     <value>true</value>
+		///     inputs of excluded addresses will be merged to one.
+		///     When
+		///     <value>false</value>
+		///     no input will be merged.
+		/// </summary>
+		public bool MergeInputs { get; }
 
 		/// <summary>
 		///     Contains a list of addresses that will not be moved even if <see cref="CollectInputs" /> is

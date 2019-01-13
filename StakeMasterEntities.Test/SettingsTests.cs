@@ -24,7 +24,7 @@ namespace StakeMaster.Entities
 		{
 			//Arrange
 			var stake = new StakeSettings(true, "DummyStakeAddress", "DummyCollectingAddress", 7, "pass");
-			var address = new OtherAddressSettings(true, null);
+			var address = new OtherAddressSettings(true, null, false);
 			var connection = new ConnectionSettings(new Uri("http://someuriitis:12345", UriKind.Absolute), "DummyUser", "DummyPassword");
 			//Act
 			var result = new Settings(stake, address, connection);
@@ -58,7 +58,7 @@ namespace StakeMaster.Entities
 		{
 			//Arrange
 			var stake = new StakeSettings(true, "DummyStakeAddress", "DummyCollectingAddress", 7, "pass");
-			var address = new OtherAddressSettings(true, null);
+			var address = new OtherAddressSettings(true, null, false);
 			ConnectionSettings connection = null;
 			//Act
 			new Settings(stake, address, connection);
@@ -74,7 +74,7 @@ namespace StakeMaster.Entities
 		{
 			//Arrange
 			StakeSettings stake = null;
-			var address = new OtherAddressSettings(true, null);
+			var address = new OtherAddressSettings(true, null, false);
 			var connection = new ConnectionSettings(new Uri("http://someuriitis:12345", UriKind.Absolute), "DummyUser", "DummyPassword");
 			//Act
 			new Settings(stake, address, connection);

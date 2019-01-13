@@ -216,7 +216,9 @@ namespace StakeMaster.BusinessLogic
 		{
 			string[] excludes = ExtractArgumentStringArrayValue(args, "-e=", "--excludeaddress=");
 			excludes = excludes.Concat(new[] {dedicatedStakingAddress, dedicatedCollectingAddress}).ToArray();
-			return new OtherAddressSettings(ExtractArgumentBoolValue(args, "-i=", "--collectinputs=", true), excludes);
+			bool merge = ExtractArgumentBoolValue(args, "-x=", "--mergeInputs=", false);
+			bool collect = ExtractArgumentBoolValue(args, "-i=", "--collectinputs=", true);
+			return new OtherAddressSettings(collect, excludes, merge);
 		}
 
 		[NotNull]

@@ -246,15 +246,42 @@ namespace StakeMaster.BusinessLogic
 			WaitTillAllConfirmed(transactions);
 		}
 
+		private void MergeExcludedAddressInputs(string[] addresses)
+		{
+			Log.Debug("Call of method: void ProcessWallet.MergeExcludedAddressInputs(List<string> addresses).");
+			Log.Verbose("Parameter addresses: {@addresses}.", addresses);
+			if (!Settings.Address.MergeInputs)
+			{
+				Log.Information("Input merge deactivated. No inputs will be merged.");
+				return;
+			}
+
+			foreach (string address in addresses.Where(a => a != Settings.Stake.DedicatedCollectingAddress && a != Settings.Stake.DedicatedStakingAddress))
+			{
+				List<string> transactions;
+				do
+				{
+					transactions = ProcessInputs(new List<string> {address}, 2, targetAddress: address);
+					WaitTillAllConfirmed(transactions);
+				} while (transactions.Count > 1);
+			}
+		}
+
 		[NotNull]
-		private List<string> ProcessInputs([NotNull] List<string> addresses, int minimunNeededInputs, decimal amountLock = decimal.MaxValue)
+		private List<string> ProcessInputs([NotNull] List<string> addresses, int minimunNeededInputs, decimal amountLock = decimal.MaxValue, [CanBeNull] string targetAddress = null)
 		{
 			Log.Debug("Call of method: List<string> ProcessWallet.ProcessInputs(List<string> addresses, int minimunNeededInputs).");
 			Log.Verbose("Parameter addresses: {@addresses}.", addresses);
 			Log.Verbose("Parameter minimunNeededInputs: {minimunNeededInputs}.", minimunNeededInputs);
 			Log.Verbose("Parameter amount: {amountLock}.", amountLock);
+			Log.Verbose("Parameter amount: {targetAddress}.", targetAddress);
 
-			if (addresses.Count == 0)
+			if (string.IsNullOrWhiteSpace(targetAddress))
+			{
+				targetAddress = Settings.Stake.DedicatedCollectingAddress;
+			}
+
+			if (addresses.Count == 0 || string.IsNullOrWhiteSpace(targetAddress))
 			{
 				var erg = new List<string>();
 				Log.Verbose("Returnvalue of ProcessWallet.ProcessInputs(List<string> addresses, int minimunNeededInputs): {@ret}.", erg);
@@ -277,7 +304,7 @@ namespace StakeMaster.BusinessLogic
 			if (transactions.Count >= minimunNeededInputs)
 			{
 				string plural = transactions.Count > 1 ? "s" : string.Empty;
-				Log.Information($"Merge {transactions.Count} input{plural} to {Settings.Stake.DedicatedCollectingAddress}.");
+				Log.Information($"Merge {transactions.Count} input{plural} to {targetAddress}.");
 				foreach (ListUnspentResponse trans in transactions)
 				{
 					Log.Debug($"Include Transaction: {trans.TxId}.");
@@ -290,8 +317,8 @@ namespace StakeMaster.BusinessLogic
 						continue;
 					}
 
-					Log.Information($"Move {amount} coins to {Settings.Stake.DedicatedCollectingAddress} without fee.");
-					outputs.Add(Settings.Stake.DedicatedCollectingAddress, amount);
+					Log.Information($"Move {amount} coins to {targetAddress} without fee.");
+					outputs.Add(targetAddress, amount);
 					transactionList.Add(Send(inputs, outputs));
 					tCount = 0;
 					inputs = new List<CreateRawTransactionInput>();
@@ -302,8 +329,8 @@ namespace StakeMaster.BusinessLogic
 
 			if (tCount > 0)
 			{
-				Log.Information($"Move {amount} coins to {Settings.Stake.DedicatedCollectingAddress} without fee.");
-				outputs.Add(Settings.Stake.DedicatedCollectingAddress, amount);
+				Log.Information($"Move {amount} coins to {targetAddress} without fee.");
+				outputs.Add(targetAddress, amount);
 				transactionList.Add(Send(inputs, outputs));
 			}
 
@@ -330,6 +357,7 @@ namespace StakeMaster.BusinessLogic
 			MoveSmallStakesToCollectAddress();
 			MinimizeInputs();
 			GenerateStakingInputs();
+			MergeExcludedAddressInputs(Settings.Address.ExcludeAddresses);
 			Log.Information("Lock wallet.");
 			AccessWallet.WalletLock();
 			Log.Information("Unlock wallet for staking only.");

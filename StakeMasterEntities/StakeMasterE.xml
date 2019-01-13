@@ -52,7 +52,7 @@
                 Contains settings for the processing of other addresses in the wallet. This class cannot be inherited.
             </summary>
         </member>
-        <member name="M:StakeMaster.OtherAddressSettings.#ctor(System.Boolean,System.String[])">
+        <member name="M:StakeMaster.OtherAddressSettings.#ctor(System.Boolean,System.String[],System.Boolean)">
             <summary>
                 Initialzes a new instance of the <see cref="T:StakeMaster.OtherAddressSettings" /> class.
             </summary>
@@ -70,6 +70,16 @@
                 When
                 <value>false</value>
                 no input will be moved.
+            </summary>
+        </member>
+        <member name="P:StakeMaster.OtherAddressSettings.MergeInputs">
+            <summary>
+                When
+                <value>true</value>
+                inputs of excluded addresses will be merged to one.
+                When
+                <value>false</value>
+                no input will be merged.
             </summary>
         </member>
         <member name="P:StakeMaster.OtherAddressSettings.ExcludeAddresses">

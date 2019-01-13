@@ -25,9 +25,10 @@ namespace StakeMaster.Entities
 			//Arrange
 			var excludeAddresses = new[] {"Dummy1", "Dummy2"};
 			//Act
-			var result = new OtherAddressSettings(false, excludeAddresses);
+			var result = new OtherAddressSettings(false, excludeAddresses, true);
 			//Assert
 			Assert.IsFalse(result.CollectInputs);
+			Assert.IsTrue(result.MergeInputs);
 			Assert.AreEqual(2, result.ExcludeAddresses.Length);
 			Assert.IsTrue(result.ExcludeAddresses.Contains(excludeAddresses[0]));
 			Assert.IsTrue(result.ExcludeAddresses.Contains(excludeAddresses[1]));
@@ -40,9 +41,10 @@ namespace StakeMaster.Entities
 			//Arrange
 			string[] excludeAddresses = null;
 			//Act
-			var result = new OtherAddressSettings(true, excludeAddresses);
+			var result = new OtherAddressSettings(true, excludeAddresses, false);
 			//Assert
 			Assert.IsTrue(result.CollectInputs);
+			Assert.IsFalse(result.MergeInputs);
 			Assert.IsNotNull(result.ExcludeAddresses);
 			Assert.AreEqual(0, result.ExcludeAddresses.Length);
 		}
